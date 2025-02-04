@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("account/", include("account.urls")),
     path("cat/", include("cat.urls")),  # Add this line
+    path("adoption/", include("adoption.urls"))
     
 ]

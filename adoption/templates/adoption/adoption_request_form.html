@@ -1,0 +1,8 @@
+<h2>Apply to Adopt {{ cat.name }}</h2>
+<form method="POST">
+    {% csrf_token %}
+    <label for="message">Message:</label>
+    <textarea name="message" placeholder="Why do you want to adopt this cat?" required></textarea>
+    <button type="submit">Submit Request</button>
+</form>
+<a href="{% url 'cat_list' %}">Back to Cats</a>

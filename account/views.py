@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from adoption.models import AdoptionRequest
 
 
 # User Account Views
@@ -47,4 +48,6 @@ def user_logout(request):
 
 @login_required
 def user_dashboard(request):
-    return render(request, "account/dashboard.html")
+    user = request.user
+    adoption_requests = AdoptionRequest.objects.filter(user=user)
+    return render(request, "account/dashboard.html", { "adoption_requests": adoption_requests })

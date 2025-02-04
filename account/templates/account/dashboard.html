@@ -1,3 +1,20 @@
 <h2>Welcome, {{ user.username }}!</h2>
-<p>This is your dashboard.</p>
+
+<h3>Your Adoption Requests</h3>
+{% if adoption_requests %}
+    <ul>
+        {% for request in adoption_requests %}
+            <li>
+                Cat: {{ request.cat.name }} - Status: {{ request.status }}
+                {% if request.status == "Pending" %}
+                    <a href="{% url 'adoption_request_cancel' request.id %}">Cancel Request</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>You have no adoption requests yet.</p>
+{% endif %}
+
+<a href="{% url 'cat_list' %}">Browse Cats</a>
 <a href="{% url 'logout' %}">Logout</a>
