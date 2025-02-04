@@ -1,0 +1,10 @@
+<h2>{% if cat %}Edit{% else %}Add{% endif %} Cat</h2>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="Name" value="{{ cat.name|default_if_none:'' }}" required>
+    <input type="text" name="breed" placeholder="Breed" value="{{ cat.breed|default_if_none:'' }}" required>
+    <input type="number" name="age" placeholder="Age" value="{{ cat.age|default_if_none:'' }}" required>
+    <input type="file" name="image">
+    <button type="submit">Save</button>
+</form>
+<a href="{% url 'cat_list' %}">Back to Cat List</a>

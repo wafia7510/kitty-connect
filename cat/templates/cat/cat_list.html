@@ -1,0 +1,18 @@
+<h2>Available Cats for Adoption</h2>
+<ul>
+    {% for cat in cats %}
+        <li>
+            {{ cat.name }} - {{ cat.breed }} - {{ cat.age }} years old
+            {% if user.is_superuser %}
+                <a href="{% url 'cat_update' cat.id %}">Edit</a>
+                <form method="POST" action="{% url 'cat_delete' cat.id %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+{% if user.is_superuser %}
+    <a href="{% url 'cat_create' %}">Add New Cat</a>
+{% endif %}
