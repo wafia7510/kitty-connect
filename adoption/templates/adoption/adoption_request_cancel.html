@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
 <h2>Cancel Adoption Request</h2>
 <p>Are you sure you want to cancel your adoption request for <strong>{{ adoption_request.cat.name }}</strong>?</p>
 
@@ -7,3 +9,4 @@
 </form>
 
 <a href="{% url 'adoption_request_list' %}">Back to My Requests</a>
+{% endblock %}

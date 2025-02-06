@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
 <h2>My Adoption Requests</h2>
 <ul>
     {% for request in requests %}
@@ -18,4 +20,4 @@
         </li>
     {% endfor %}
 </ul>
-
+{% endblock %}

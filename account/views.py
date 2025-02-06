@@ -50,4 +50,7 @@ def user_logout(request):
 def user_dashboard(request):
     user = request.user
     adoption_requests = AdoptionRequest.objects.filter(user=user)
-    return render(request, "account/dashboard.html", { "adoption_requests": adoption_requests })
+    return render(request, "account/dashboard.html", {"adoption_requests": adoption_requests})
+
+def home(request):
+    return render(request, "home.html")
