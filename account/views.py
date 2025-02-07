@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from adoption.models import AdoptionRequest
+from cat.models import Cat
 
 
 # User Account Views
@@ -53,4 +54,5 @@ def user_dashboard(request):
     return render(request, "account/dashboard.html", {"adoption_requests": adoption_requests})
 
 def home(request):
-    return render(request, "home.html")
+    cats = Cat.objects.all()[:3]  # Show 3 random cats
+    return render(request, "home.html", {"cats": cats})

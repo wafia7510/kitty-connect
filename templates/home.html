@@ -1,19 +1,74 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
-<div class="container text-center mt-5">
-    <h1>Welcome to Kitty Connect! 🐱</h1>
-    <p class="lead">Find your perfect feline friend and give them a loving home.</p>
-
-    <div class="mt-4">
-        <a href="{% url 'cat_list' %}" class="btn btn-primary">View Cats Available for Adoption</a>
+<!-- Hero Section -->
+<section class="hero text-center">
+    <div class="container">
+        <h1>🐱 Welcome to Kitty Connect! 🐾</h1>
+        <p>Find your perfect feline friend and give them a loving home.</p>
+        <a href="{% url 'cat_list' %}" class="btn btn-primary btn-lg">View Cats for Adoption</a>
     </div>
+</section>
 
-    {% if not user.is_authenticated %}
-    <div class="mt-3">
-        <a href="{% url 'register' %}" class="btn btn-success">Sign Up</a>
-        <a href="{% url 'login' %}" class="btn btn-outline-primary">Login</a>
+<!-- Meet Our Cats -->
+<section class="cats-section text-center">
+    <div class="container">
+        <h2>Meet Our Lovely Cats! 😻</h2>
+        <div class="row">
+            {% for cat in cats %}
+            <div class="col-md-4">
+                <div class="card">
+                    {% if cat.image %}
+                        <img src="{{ cat.image.url }}" class="card-img-top" alt="{{ cat.name }}">
+                    {% else %}
+                        <img src="{% static 'images/default-cat.jpg' %}" class="card-img-top" alt="Default Cat">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ cat.name }}</h5>
+                        <p class="card-text">{{ cat.breed }} - {{ cat.age }} years old</p>
+                        <a href="{% url 'adoption_request_create' cat.id %}" class="btn btn-success">Adopt Me</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
-    {% endif %}
-</div>
+</section>
+
+<!-- Adoption Process -->
+<section class="adoption-process text-center">
+    <div class="container">
+        <h2>How to Adopt?</h2>
+        <p>Follow these simple steps to bring home your new furry friend.</p>
+        <ul class="list-group">
+            <li class="list-group-item">1️⃣ Browse our available cats.</li>
+            <li class="list-group-item">2️⃣ Submit an adoption request.</li>
+            <li class="list-group-item">3️⃣ Our team will review and approve your request.</li>
+            <li class="list-group-item">4️⃣ Take your new friend home! 🎉</li>
+        </ul>
+    </div>
+</section>
+
+<!-- Why Adopt From Us? -->
+<section class="why-adopt text-center">
+    <div class="container">
+        <h2>Why Adopt from Kitty Connect?</h2>
+        <p>We ensure every cat gets the best care and a loving home.</p>
+        <div class="row">
+            <div class="col-md-4">
+                <h3>🐾 Well-Cared Cats</h3>
+                <p>Our cats receive medical check-ups and vaccinations.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>🏠 Safe Adoptions</h3>
+                <p>We carefully review all adoption requests.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>💖 Lifetime Support</h3>
+                <p>We provide guidance even after adoption.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
 {% endblock %}

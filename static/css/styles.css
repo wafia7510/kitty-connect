@@ -1,0 +1,50 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Hero Section */
+.hero {
+    background: url('/static/images/cat-paws.jpg') no-repeat center center/cover;
+    color: white;
+    padding: 100px 0;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 1.5rem;
+}
+
+/* Cats Section */
+.cats-section {
+    padding: 50px 0;
+}
+
+.cats-section .card {
+    margin: 10px;
+    transition: transform 0.3s;
+}
+
+.cats-section .card:hover {
+    transform: scale(1.05);
+}
+
+/* Adoption Process */
+.adoption-process {
+    background: #f8f9fa;
+    padding: 50px 0;
+}
+
+/* Why Adopt Section */
+.why-adopt {
+    padding: 50px 0;
+}
+
+.why-adopt h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
