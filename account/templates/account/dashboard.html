@@ -1,23 +1,53 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Welcome, {{ user.username }}!</h2>
+<div class="container mt-4">
+    <h2 class="text-center">🐾 Your Adoption Requests</h2>
 
-<h3>Your Adoption Requests</h3>
-{% if adoption_requests %}
-    <ul>
-        {% for request in adoption_requests %}
-            <li>
-                Cat: {{ request.cat.name }} - Status: {{ request.status }}
-                {% if request.status == "Pending" %}
-                    <a href="{% url 'adoption_request_cancel' request.id %}">Cancel Request</a>
-                {% endif %}
-            </li>
+    {% if adoption_requests %}
+        <div class="row">
+            {% for request in adoption_requests %}
+                <div class="col-md-6">
+                    <div class="card shadow-sm p-3 mb-4 bg-white rounded">
+                        <div class="card-body">
+                            <h5 class="card-title">Cat: {{ request.cat.name }}</h5>
+                            <p class="card-text">
+                                <strong>Status:</strong> 
+                                {% if request.status == "Pending" %}
+                                    <span class="badge bg-warning text-dark">Pending</span>
+                                {% elif request.status == "Approved" %}
+                                    <span class="badge bg-success">Approved</span>
+                                {% else %}
+                                    <span class="badge bg-danger">Rejected</span>
+                                {% endif %}
+                            </p>
+                            {% if request.status == "Pending" %}
+                                <a href="{% url 'adoption_request_cancel' request.id %}" class="btn btn-danger">Cancel Request</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-muted text-center">You have no adoption requests yet. 😺</p>
+    {% endif %}
+
+    <!-- Available Cats for Adoption Section -->
+    <h2 class="text-center mt-5">🐱 Cats Available for Adoption</h2>
+    <div class="row">
+        {% for cat in available_cats %}
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="{{ cat.image.url }}" class="card-img-top" alt="{{ cat.name }}">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ cat.name }}</h5>
+                        <p class="card-text">{{ cat.breed }} - {{ cat.age }} years old</p>
+                        <a href="{% url 'adoption_request_create' cat.id %}" class="btn btn-success">Adopt Me</a>
+                    </div>
+                </div>
+            </div>
         {% endfor %}
-    </ul>
-{% else %}
-    <p>You have no adoption requests yet.</p>
-{% endif %}
-
-<a href="{% url 'cat_list' %}">Browse Cats</a>
-<a href="{% url 'logout' %}">Logout</a>
+    </div>
+</div>
 {% endblock %}
+

@@ -35,12 +35,14 @@ def user_login(request):
 
         if user is not None:
             login(request, user)
-            return redirect("dashboard")  # Redirect to user dashboard
+            next_url = request.GET.get("next")  # Get the URL to redirect after login
+            return redirect(next_url if next_url else "dashboard")
         else:
             messages.error(request, "Invalid username or password!")
             return redirect("login")
 
     return render(request, "account/login.html")
+
 
 # User Logout
 def user_logout(request):
@@ -51,7 +53,17 @@ def user_logout(request):
 def user_dashboard(request):
     user = request.user
     adoption_requests = AdoptionRequest.objects.filter(user=user)
-    return render(request, "account/dashboard.html", {"adoption_requests": adoption_requests})
+    
+    # Get cats the user has already applied for or been approved/rejected
+    applied_cats = adoption_requests.values_list('cat_id', flat=True)
+
+    # Get available cats that the user hasn't applied for
+    available_cats = Cat.objects.filter(available=True).exclude(id__in=applied_cats)
+
+    return render(request, "account/dashboard.html", {
+        "adoption_requests": adoption_requests,
+        "available_cats": available_cats
+    })
 
 def home(request):
     cats = Cat.objects.all()[:3]  # Show 3 random cats
