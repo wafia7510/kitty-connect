@@ -1,78 +1,206 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load static %}
+
 {% block content %}
+
 <!-- Hero Section -->
-<section class="hero text-center">
+<section class="hero text-center text-white d-flex align-items-center justify-content-center">
     <div class="container">
-        <h1>🐱 Welcome to Kitty Connect! 🐾</h1>
-        <p>Find your perfect feline friend and give them a loving home.</p>
-        <a href="{% url 'cat_list' %}" class="btn btn-primary btn-lg">View Cats for Adoption</a>
+        <h1>Find Your Purr-fect Companion! 🐾</h1>
+        <p>Adopt a cat and give them a loving home today!</p>
+        <a href="{% url 'cat_list' %}" class="btn btn-primary btn-lg">View All Cats</a>
     </div>
 </section>
 
-<!-- Meet Our Cats -->
-<section class="cats-section text-center">
+<!-- What We Do Section -->
+<!-- What We Do Section -->
+<section class="what-we-do py-5">
     <div class="container">
-        <h2>Meet Our Lovely Cats! 😻</h2>
-        <div class="row">
-            {% for cat in cats %}
-            <div class="col-md-4">
-                <div class="card">
-                    {% if cat.image %}
-                        <img src="{{ cat.image.url }}" class="card-img-top" alt="{{ cat.name }}">
-                    {% else %}
-                        <img src="{% static 'images/default-cat.jpg' %}" class="card-img-top" alt="Default Cat">
-                    {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{ cat.name }}</h5>
-                        <p class="card-text">{{ cat.breed }} - {{ cat.age }} years old</p>
-                        {% if user.is_authenticated %}
-                            <a href="{% url 'adoption_request_create' cat.id %}" class="btn btn-success">Adopt Me</a>
-                        {% else %}
-                            <a href="{% url 'login' %}" class="btn btn-warning">Login to Adopt</a>
-                        {% endif %}
+        <h2>🐾 What We Do</h2>
+        <p>At Kitty Connect, we are dedicated to helping homeless and abandoned cats find loving homes.</p>
+        
+        <div class="service-container">
+            <div class="service-box">
+                <i class="fas fa-hand-holding-heart"></i>
+                <h4>Rescue</h4>
+                <p>We save abandoned and stray cats, providing them with immediate care and shelter.</p>
+            </div>
+
+            <div class="service-box">
+                <i class="fas fa-heartbeat"></i>
+                <h4>Rehabilitate</h4>
+                <p>Our team ensures every rescued cat gets medical attention, vaccinations, and socialization.</p>
+            </div>
+
+            <div class="service-box">
+                <i class="fas fa-home"></i>
+                <h4>Rehome</h4>
+                <p>We connect cats with responsible adopters who can provide them with a forever home.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Why We Do Section -->
+<!-- Why We Do Section -->
+<section class="why-we-do py-5">
+    <div class="container">
+        <h2>🐾 Why We Do This</h2>
+        
+        <div class="why-we-do-content">
+            <!-- Image on one side -->
+            <div>
+                <img src="{% static 'images/adopted-cat.jpg' %}" alt="Cat Adoption">
+            </div>
+
+            <!-- Text and stats on the other side -->
+            <div class="why-we-do-text">
+                <p>Every cat deserves a second chance at love and happiness. Through adoption, we help them find their forever homes.</p>
+
+                <div class="stats-container">
+                    <div class="stat-box">
+                        <i class="fas fa-cat"></i>
+                        <h3>5,000+</h3>
+                        <p>Cats Rescued</p>
+                    </div>
+
+                    <div class="stat-box">
+                        <i class="fas fa-home"></i>
+                        <h3>3,800+</h3>
+                        <p>Cats Adopted</p>
+                    </div>
+
+                    <div class="stat-box">
+                        <i class="fas fa-heart"></i>
+                        <h3>200+</h3>
+                        <p>Happy Families</p>
                     </div>
                 </div>
+
+                <p class="lead mt-3">
+                    "A cat's love is unconditional, and adoption changes lives – for both the cat and the adopter."
+                </p>
             </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- How to Adopt Section -->
+<section class="how-to-adopt py-5 text-center bg-light">
+    <div class="container">
+        <h2>How to Adopt? 🐾</h2>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="step p-4 shadow rounded">
+                    <i class="fas fa-search fa-3x text-warning"></i>
+                    <h4 class="mt-3">1. Browse Cats</h4>
+                    <p>Find your perfect match.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="step p-4 shadow rounded">
+                    <i class="fas fa-file-alt fa-3x text-primary"></i>
+                    <h4 class="mt-3">2. Apply</h4>
+                    <p>Submit an adoption request.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="step p-4 shadow rounded">
+                    <i class="fas fa-calendar-check fa-3x text-success"></i>
+                    <h4 class="mt-3">3. Meet & Greet</h4>
+                    <p>Schedule a visit.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="step p-4 shadow rounded">
+                    <i class="fas fa-home fa-3x text-info"></i>
+                    <h4 class="mt-3">4. Take Home</h4>
+                    <p>Welcome your new friend!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Meet Our Cats (Three Cards Section) -->
+<section class="meet-cats text-center py-5">
+    <div class="container">
+        <h2 class="mb-4">😻 Meet Our Cats</h2>
+        <div class="row">
+            {% for cat in cats|slice:":3" %}
+                <div class="col-md-4">
+                    <div class="card shadow-lg">
+                        <img src="{{ cat.image.url }}" class="card-img-top fixed-cat-img" alt="{{ cat.name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ cat.name }}</h5>
+                            <p class="card-text">{{ cat.breed }} - {{ cat.age }} years old</p>
+                            <a href="{% url 'adoption_request_create' cat.id %}" class="btn btn-warning">Adopt Me</a>
+                        </div>
+                    </div>
+                </div>
             {% endfor %}
         </div>
+        <a href="{% url 'cat_list' %}" class="btn btn-primary mt-3">View More Cats</a>
     </div>
 </section>
 
-<!-- Adoption Process -->
-<section class="adoption-process text-center">
+<!-- Cat Care & Tips Carousel -->
+<section class="cat-care-tips bg-light py-5 text-center">
     <div class="container">
-        <h2>How to Adopt?</h2>
-        <p>Follow these simple steps to bring home your new furry friend.</p>
-        <ul class="list-group">
-            <li class="list-group-item">1️⃣ Browse our available cats.</li>
-            <li class="list-group-item">2️⃣ Submit an adoption request.</li>
-            <li class="list-group-item">3️⃣ Our team will review and approve your request.</li>
-            <li class="list-group-item">4️⃣ Take your new friend home! 🎉</li>
-        </ul>
-    </div>
-</section>
-
-<!-- Why Adopt From Us? -->
-<section class="why-adopt text-center">
-    <div class="container">
-        <h2>Why Adopt from Kitty Connect?</h2>
-        <p>We ensure every cat gets the best care and a loving home.</p>
-        <div class="row">
-            <div class="col-md-4">
-                <h3>🐾 Well-Cared Cats</h3>
-                <p>Our cats receive medical check-ups and vaccinations.</p>
+        <h2>Cat Care Tips 🐾</h2>
+        <div id="catCareCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <h4>✅ Provide fresh water and nutritious food daily.</h4>
+                </div>
+                <div class="carousel-item">
+                    <h4>✅ Keep their litter box clean and in a quiet place.</h4>
+                </div>
+                <div class="carousel-item">
+                    <h4>✅ Take your cat for regular vet check-ups.</h4>
+                </div>
+                <div class="carousel-item">
+                    <h4>✅ Give them love, attention, and plenty of playtime.</h4>
+                </div>
             </div>
-            <div class="col-md-4">
-                <h3>🏠 Safe Adoptions</h3>
-                <p>We carefully review all adoption requests.</p>
-            </div>
-            <div class="col-md-4">
-                <h3>💖 Lifetime Support</h3>
-                <p>We provide guidance even after adoption.</p>
-            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#catCareCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#catCareCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
         </div>
     </div>
 </section>
+
+<!-- Footer -->
+<footer class="bg-dark text-white text-center py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h5>Contact Us</h5>
+                <p>Email: info@kittyconnect.com</p>
+                <p>Phone: +1 234 567 890</p>
+            </div>
+            <div class="col-md-4">
+                <h5>Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'home' %}" class="text-white">Home</a></li>
+                    <li><a href="{% url 'cat_list' %}" class="text-white">Available Cats</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h5>Follow Us</h5>
+                <a href="#" class="text-white mx-2"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="text-white mx-2"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-white mx-2"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+        <hr>
+        <p class="mb-0">© 2025 Kitty Connect | All Rights Reserved</p>
+    </div>
+</footer>
 
 {% endblock %}
