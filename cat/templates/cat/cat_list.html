@@ -3,21 +3,28 @@
 <h2>Available Cats for Adoption</h2>
 <ul>
     {% for cat in cats %}
-        <li>
-            {{ cat.name }} - {{ cat.breed }} - {{ cat.age }} years old
-            {% if user.is_authenticated and not user.is_superuser %}
-                <a href="{% url 'adoption_request_create' cat_id=cat.id %}">Adopt {{ cat.name }}</a>
-            {% endif %}
-            
-            {% if user.is_superuser %}
-                <a href="{% url 'cat_update' cat.id %}">Edit</a>
-                <form method="POST" action="{% url 'cat_delete' cat.id %}" style="display:inline;">
+    <li>
+        {{ cat.name }} - {{ cat.breed }} - {{ cat.age }} years old
+
+        {% if user.is_authenticated and not user.is_superuser %}
+            <a href="{% url 'adoption_request_create' cat_id=cat.id %}">Adopt {{ cat.name }}</a>
+
+            {% if cat.id in favorite_cats %}
+                <!-- Already in Favorites (Disabled Button) -->
+                <button class="btn btn-secondary btn-sm" disabled>✅ Added to Favorites</button>
+            {% else %}
+                <!-- Add to Favorites Button -->
+                <form method="post" action="{% url 'add_to_favorites' cat.id %}" style="display:inline;">
                     {% csrf_token %}
-                    <button type="submit">Delete</button>
+                    <button type="submit" class="btn btn-primary btn-sm favorite-btn">
+                        ❤️ Add to Favorites
+                    </button>
                 </form>
             {% endif %}
-        </li>
-    {% endfor %}
+        {% endif %}
+    </li>
+{% endfor %}
+
 </ul>
 
 {% if user.is_superuser %}

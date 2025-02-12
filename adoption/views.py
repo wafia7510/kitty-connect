@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .models import AdoptionRequest
+from adoption.models import AdoptionRequest
 from cat.models import Cat
+from account.models import Favorite
 
 # Create your views here.
 # Admin Check
@@ -19,15 +20,17 @@ def adoption_request_list(request):
     return render(request, "adoption/adoption_request_list.html", {"requests": requests})
 
 # Create an adoption request
+
 @login_required
 def adoption_request_create(request, cat_id):
     cat = get_object_or_404(Cat, pk=cat_id)
     if request.method == "POST":
-        message = request.POST.get("message", "") 
-        AdoptionRequest.objects.create(user=request.user, cat=cat, message=message, status="Pending")
+        message = request.POST.get("message", "")  # ✅ Now this field exists in the model
+        AdoptionRequest.objects.create(user=request.user, cat=cat, message=message, status="pending")
         return redirect("adoption_request_list")
 
     return render(request, "adoption/adoption_request_form.html", {"cat": cat})
+
 
 # Update adoption request (Admin Only)
 @user_passes_test(is_admin)

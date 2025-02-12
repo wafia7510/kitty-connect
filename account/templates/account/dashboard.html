@@ -1,53 +1,63 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container mt-4">
-    <h2 class="text-center">🐾 Your Adoption Requests</h2>
+    <h2>Welcome, {{ user.username }}!</h2>
 
-    {% if adoption_requests %}
-        <div class="row">
+    <!-- Adoption Requests -->
+    <h3>Your Adoption Requests</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Cat</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
             {% for request in adoption_requests %}
-                <div class="col-md-6">
-                    <div class="card shadow-sm p-3 mb-4 bg-white rounded">
-                        <div class="card-body">
-                            <h5 class="card-title">Cat: {{ request.cat.name }}</h5>
-                            <p class="card-text">
-                                <strong>Status:</strong> 
-                                {% if request.status == "Pending" %}
-                                    <span class="badge bg-warning text-dark">Pending</span>
-                                {% elif request.status == "Approved" %}
-                                    <span class="badge bg-success">Approved</span>
-                                {% else %}
-                                    <span class="badge bg-danger">Rejected</span>
-                                {% endif %}
-                            </p>
-                            {% if request.status == "Pending" %}
-                                <a href="{% url 'adoption_request_cancel' request.id %}" class="btn btn-danger">Cancel Request</a>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
+                <tr>
+                    <td>{{ request.cat.name }}</td>
+                    <td>{{ request.status }}</td>
+                    <td>
+                        {% if request.status == "Pending" %}
+                            <form action="{% url 'adoption_request_cancel' request.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">Cancel</button>
+                            </form>
+                        {% endif %}
+                    </td>
+                </tr>
             {% endfor %}
-        </div>
-    {% else %}
-        <p class="text-muted text-center">You have no adoption requests yet. 😺</p>
-    {% endif %}
+        </tbody>
+    </table>
 
-    <!-- Available Cats for Adoption Section -->
-    <h2 class="text-center mt-5">🐱 Cats Available for Adoption</h2>
-    <div class="row">
-        {% for cat in available_cats %}
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="{{ cat.image.url }}" class="card-img-top" alt="{{ cat.name }}">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">{{ cat.name }}</h5>
-                        <p class="card-text">{{ cat.breed }} - {{ cat.age }} years old</p>
-                        <a href="{% url 'adoption_request_create' cat.id %}" class="btn btn-success">Adopt Me</a>
-                    </div>
-                </div>
-            </div>
+    <!-- Adoption History -->
+    <h3>Adoption History</h3>
+    <ul>
+        {% for cat in adopted_cats %}
+            <li>{{ cat.cat.name }} - Adopted!</li>
+        {% empty %}
+            <p>No past adoptions.</p>
         {% endfor %}
-    </div>
+    </ul>
+
+    <!-- Wishlist (Favorite Cats) -->
+    <h3>Wishlist (Favorite Cats)</h3>
+    <ul>
+        {% for favorite in favorite_cats %}
+            <li>
+                {{ favorite.cat.name }} 
+                <form action="{% url 'remove_from_favorites' favorite.cat.id %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-danger remove-favorite-btn">
+                        ❌ Remove
+                    </button>
+                </form>
+            </li>
+        {% empty %}
+            <p>No favorite cats yet.</p>
+        {% endfor %}
+    </ul>
+    
 </div>
 {% endblock %}
-

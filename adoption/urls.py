@@ -4,7 +4,7 @@ from .views import (
     adoption_request_create, 
     adoption_request_update, 
     adoption_request_delete,
-    adoption_request_cancel,  # New Cancel Request View
+    adoption_request_cancel,  
 )
 
 urlpatterns = [

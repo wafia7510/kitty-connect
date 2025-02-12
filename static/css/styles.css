@@ -307,3 +307,30 @@ footer hr {
 footer p {
     margin-top: 20px;
 }
+.favorite-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.favorite-btn:hover {
+    background-color: #0056b3;
+}
+
+.remove-favorite-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.remove-favorite-btn:hover {
+    background-color: #a71d2a;
+}

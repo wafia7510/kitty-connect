@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Cat
 from django.contrib.auth.decorators import login_required, user_passes_test
+from account.models import Favorite
+
 # Create your views here.
 # Admin Check
 def is_admin(user):
@@ -10,7 +12,15 @@ def is_admin(user):
 # List all cats
 def cat_list(request):
     cats = Cat.objects.all()
-    return render(request, "cat/cat_list.html", {"cats": cats})
+    favorite_cats = []
+
+    if request.user.is_authenticated:
+        favorite_cats = Favorite.objects.filter(user=request.user).values_list("cat_id", flat=True)
+
+    return render(request, "cat/cat_list.html", {
+        "cats": cats,
+        "favorite_cats": favorite_cats,  # Pass favorite cat IDs to the template
+    })
 
 # Create a new cat (Admin Only)
 @user_passes_test(is_admin)
