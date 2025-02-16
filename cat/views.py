@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Cat
 from django.contrib.auth.decorators import login_required, user_passes_test
 from account.models import Favorite
+from adoption.models import AdoptionRequest
 
 # Create your views here.
 # Admin Check
@@ -24,7 +25,6 @@ def cat_list(request):
 
 # Create a new cat (Admin Only)
 @user_passes_test(is_admin)
-
 def cat_create(request):
     if request.method == "POST":
         name = request.POST["name"]
@@ -53,12 +53,24 @@ def cat_update(request, pk):
     return render(request, "cat/cat_form.html", {"cat": cat})
 
 # Delete a cat (Admin Only)
+# Delete a cat (Admin Only)
 @user_passes_test(is_admin)
-
 def cat_delete(request, pk):
     cat = get_object_or_404(Cat, pk=pk)
+    
     if request.method == "POST":
         cat.delete()
-        return redirect("cat_list")
-
+        return redirect("admin_dashboard")  # ✅ Redirect instead of rendering the delete template
     return render(request, "cat/cat_confirm_delete.html", {"cat": cat})
+
+    
+
+@user_passes_test(is_admin)
+def admin_dashboard(request):
+    cats = Cat.objects.all()
+    adoption_requests = AdoptionRequest.objects.all()  # Get all adoption requests
+
+    return render(request, "admin/admin_dashboard.html", {
+        "cats": cats,
+        "adoption_requests": adoption_requests,
+    })

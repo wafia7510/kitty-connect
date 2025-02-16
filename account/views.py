@@ -36,8 +36,9 @@ def user_login(request):
 
         if user is not None:
             login(request, user)
-            next_url = request.GET.get("next")  # Get the URL to redirect after login
-            return redirect(next_url if next_url else "dashboard")
+            if user.is_superuser:
+                return redirect("admin_dashboard")  # Redirect admins to the admin dashboard
+            return redirect("dashboard")  # Redirect regular users to the user dashboard
         else:
             messages.error(request, "Invalid username or password!")
             return redirect("login")

@@ -1,13 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>{% if cat %}Edit{% else %}Add{% endif %} Cat</h2>
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <input type="text" name="name" placeholder="Name" value="{{ cat.name|default_if_none:'' }}" required>
-    <input type="text" name="breed" placeholder="Breed" value="{{ cat.breed|default_if_none:'' }}" required>
-    <input type="number" name="age" placeholder="Age" value="{{ cat.age|default_if_none:'' }}" required>
-    <input type="file" name="image">
-    <button type="submit">Save</button>
-</form>
-<a href="{% url 'cat_list' %}">Back to Cat List</a>
+<div class="container mt-4">
+    <h2>{% if cat %}Edit{% else %}Add{% endif %} Cat</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" name="name" class="form-control" value="{{ cat.name|default:'' }}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Breed</label>
+            <input type="text" name="breed" class="form-control" value="{{ cat.breed|default:'' }}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Age</label>
+            <input type="number" name="age" class="form-control" value="{{ cat.age|default:'' }}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Image</label>
+            <input type="file" name="image" class="form-control">
+            {% if cat.image %}
+                <p>Current Image: <img src="{{ cat.image.url }}" width="100"></p>
+            {% endif %}
+        </div>
+        <button type="submit" class="btn btn-success">💾 Save</button>
+        <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
 {% endblock %}

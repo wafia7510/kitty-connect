@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Review Adoption Request</h2>
+
+    <div class="card p-3">
+        <h4>🐱 Cat: {{ adoption_request.cat.name }}</h4>
+        <p><strong>Breed:</strong> {{ adoption_request.cat.breed }}</p>
+        <p><strong>Age:</strong> {{ adoption_request.cat.age }} years</p>
+        <p><strong>User:</strong> {{ adoption_request.user.username }}</p>
+        <p><strong>Status:</strong> 
+            <span class="badge {% if adoption_request.status == 'Approved' %}bg-success{% elif adoption_request.status == 'Rejected' %}bg-danger{% else %}bg-warning{% endif %}">
+                {{ adoption_request.status }}
+            </span>
+        </p>
+        <p><strong>User Message:</strong> {{ adoption_request.message }}</p>
+        
+        <!-- ✅ FIX: Ensure 'Pending' condition is checked correctly -->
+        {% if adoption_request.status|lower == "pending" %}
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" name="action" value="approve" class="btn btn-success">✅ Approve</button>
+                <button type="submit" name="action" value="reject" class="btn btn-danger">❌ Reject</button>
+            </form>
+        {% else %}
+            <p class="text-muted">This request has already been processed.</p>
+        {% endif %}
+    </div>
+
+    <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary mt-3">⬅ Back to Dashboard</a>
+</div>
+{% endblock %}

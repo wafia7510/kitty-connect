@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Admin Dashboard - Manage Cats</h2>
+    
+    <a href="{% url 'cat_create' %}" class="btn btn-success mb-3">➕ Add New Cat</a>
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Breed</th>
+                <th>Age</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cat in cats %}
+                <tr>
+                    <td><img src="{{ cat.image.url }}" alt="{{ cat.name }}" width="80"></td>
+                    <td>{{ cat.name }}</td>
+                    <td>{{ cat.breed }}</td>
+                    <td>{{ cat.age }} years</td>
+                    <td>
+                        <a href="{% url 'cat_update' cat.id %}" class="btn btn-warning btn-sm">✏️ Edit</a>
+                        <form action="{% url 'cat_delete' cat.id %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm">🗑️ Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr><td colspan="5" class="text-center">No cats available.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Manage Adoption Requests</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Cat</th>
+                <th>User</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in adoption_requests %}
+                <tr>
+                    <td>{{ request.cat.name }}</td>
+                    <td>{{ request.user.username }}</td>
+                    <td>
+                        <span class="badge {% if request.status == 'Approved' %}bg-success{% elif request.status == 'Rejected' %}bg-danger{% else %}bg-warning{% endif %}">
+                            {{ request.status }}
+                        </span>
+                    </td>
+                    <td>
+                        <a href="{% url 'review_adoption_request' request.id %}" class="btn btn-primary btn-sm">📄 Review</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr><td colspan="4">No adoption requests available.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+
+</div>
+{% endblock %}
