@@ -2,10 +2,9 @@
 {% load static %}
 
 {% block content %}
-
-<!-- Hero Section -->
-<section class="hero text-center text-white d-flex align-items-center justify-content-center">
-    <div class="container">
+<!-- Hero Section (Main Banner) -->
+<section class="hero" role="banner" aria-label="Hero Section">
+    <div class="container text-center">
         <h1>Find Your Purr-fect Companion! 🐾</h1>
         <p>Adopt a cat and give them a loving home today!</p>
         <a href="{% url 'cat_list' %}" class="btn btn-primary btn-lg">View All Cats</a>
@@ -13,144 +12,148 @@
 </section>
 
 <!-- What We Do Section -->
-<!-- What We Do Section -->
-<section class="what-we-do py-5">
+<section class="what-we-do" role="region" aria-labelledby="what-we-do-heading">
     <div class="container">
-        <h2>🐾 What We Do</h2>
-        <p>At Kitty Connect, we are dedicated to helping homeless and abandoned cats find loving homes.</p>
-        
+        <h2 id="what-we-do-heading" class="text-center">🐾 What We Do</h2>
+        <p class="text-center">We rescue, rehabilitate, and rehome cats, ensuring they find loving families.</p>
+
         <div class="service-container">
-            <div class="service-box">
-                <i class="fas fa-hand-holding-heart"></i>
-                <h4>Rescue</h4>
-                <p>We save abandoned and stray cats, providing them with immediate care and shelter.</p>
-            </div>
+            <!-- Rescue Box -->
+            <article class="service-box" role="article" aria-labelledby="rescue-heading">
+                <i class="fas fa-hand-holding-heart" aria-hidden="true"></i>
+                <h4 id="rescue-heading">Rescue</h4>
+                <p>We save abandoned and stray cats, providing immediate care and shelter.</p>
+            </article>
 
-            <div class="service-box">
-                <i class="fas fa-heartbeat"></i>
-                <h4>Rehabilitate</h4>
-                <p>Our team ensures every rescued cat gets medical attention, vaccinations, and socialization.</p>
-            </div>
+            <!-- Rehabilitate Box -->
+            <article class="service-box" role="article" aria-labelledby="rehabilitate-heading">
+                <i class="fas fa-heartbeat" aria-hidden="true"></i>
+                <h4 id="rehabilitate-heading">Rehabilitate</h4>
+                <p>Our team ensures every rescued cat gets the medical attention and socialization needed.</p>
+            </article>
 
-            <div class="service-box">
-                <i class="fas fa-home"></i>
-                <h4>Rehome</h4>
-                <p>We connect cats with responsible adopters who can provide them with a forever home.</p>
-            </div>
+            <!-- Rehome Box -->
+            <article class="service-box" role="article" aria-labelledby="rehome-heading">
+                <i class="fas fa-home" aria-hidden="true"></i>
+                <h4 id="rehome-heading">Rehome</h4>
+                <p>We connect cats with responsible adopters who can offer them a forever home.</p>
+            </article>
         </div>
     </div>
 </section>
 
-
 <!-- Why We Do Section -->
-<!-- Why We Do Section -->
-<section class="why-we-do py-5">
+<section class="why-we-do" role="region" aria-labelledby="why-we-do-heading">
     <div class="container">
-        <h2>🐾 Why We Do This</h2>
-        
+        <h2 id="why-we-do-heading" class="text-center">🐾 Why We Do This</h2>
+
         <div class="why-we-do-content">
-            <!-- Image on one side -->
-            <div>
-                <img src="{% static 'images/adopted-cat.jpg' %}" alt="Cat Adoption">
-            </div>
-
-            <!-- Text and stats on the other side -->
             <div class="why-we-do-text">
-                <p>Every cat deserves a second chance at love and happiness. Through adoption, we help them find their forever homes.</p>
-
+                <p>Every cat deserves a second chance at love and happiness. Through adoption, we help them find their forever homes and bring joy to families.</p>
+                
+                <!-- Statistics Section -->
                 <div class="stats-container">
                     <div class="stat-box">
-                        <i class="fas fa-cat"></i>
+                        <i class="fas fa-cat" aria-hidden="true"></i>
                         <h3>5,000+</h3>
                         <p>Cats Rescued</p>
                     </div>
-
                     <div class="stat-box">
-                        <i class="fas fa-home"></i>
+                        <i class="fas fa-home" aria-hidden="true"></i>
                         <h3>3,800+</h3>
                         <p>Cats Adopted</p>
                     </div>
-
                     <div class="stat-box">
-                        <i class="fas fa-heart"></i>
+                        <i class="fas fa-heart" aria-hidden="true"></i>
                         <h3>200+</h3>
                         <p>Happy Families</p>
                     </div>
                 </div>
 
-                <p class="lead mt-3">
-                    "A cat's love is unconditional, and adoption changes lives – for both the cat and the adopter."
-                </p>
+                <p class="lead mt-3">"A cat's love is unconditional – adopt and change a life today!"</p>
+            </div>
+
+            <!-- Image Representation -->
+            <div>
+                <img src="{% static 'images/adopted-cat.jpg' %}" alt="Happy adopted cat" class="img-fluid">
             </div>
         </div>
     </div>
 </section>
-
 
 <!-- How to Adopt Section -->
-<section class="how-to-adopt py-5 text-center bg-light">
-    <div class="container">
-        <h2>How to Adopt? 🐾</h2>
+<section class="how-to-adopt bg-light" role="region" aria-labelledby="how-to-adopt-heading">
+    <div class="container text-center">
+        <h2 id="how-to-adopt-heading">How to Adopt? 🐾</h2>
+
         <div class="row">
             <div class="col-md-3">
-                <div class="step p-4 shadow rounded">
-                    <i class="fas fa-search fa-3x text-warning"></i>
-                    <h4 class="mt-3">1. Browse Cats</h4>
+                <article class="step">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <h4>1. Browse Cats</h4>
                     <p>Find your perfect match.</p>
-                </div>
+                </article>
             </div>
+
             <div class="col-md-3">
-                <div class="step p-4 shadow rounded">
-                    <i class="fas fa-file-alt fa-3x text-primary"></i>
-                    <h4 class="mt-3">2. Apply</h4>
+                <article class="step">
+                    <i class="fas fa-file-alt" aria-hidden="true"></i>
+                    <h4>2. Apply</h4>
                     <p>Submit an adoption request.</p>
-                </div>
+                </article>
             </div>
+
             <div class="col-md-3">
-                <div class="step p-4 shadow rounded">
-                    <i class="fas fa-calendar-check fa-3x text-success"></i>
-                    <h4 class="mt-3">3. Meet & Greet</h4>
+                <article class="step">
+                    <i class="fas fa-calendar-check" aria-hidden="true"></i>
+                    <h4>3. Meet & Greet</h4>
                     <p>Schedule a visit.</p>
-                </div>
+                </article>
             </div>
+
             <div class="col-md-3">
-                <div class="step p-4 shadow rounded">
-                    <i class="fas fa-home fa-3x text-info"></i>
-                    <h4 class="mt-3">4. Take Home</h4>
+                <article class="step">
+                    <i class="fas fa-home" aria-hidden="true"></i>
+                    <h4>4. Take Home</h4>
                     <p>Welcome your new friend!</p>
-                </div>
+                </article>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Meet Our Cats (Three Cards Section) -->
-<section class="meet-cats text-center py-5">
+<!-- Meet Our Cats Section -->
+<section class="meet-cats" role="region" aria-labelledby="meet-our-cats-heading">
     <div class="container">
-        <h2 class="mb-4">😻 Meet Our Cats</h2>
+        <h2 id="meet-our-cats-heading" class="text-center">😻 Meet Our Cats</h2>
+
         <div class="row">
             {% for cat in cats|slice:":3" %}
-                <div class="col-md-4">
-                    <div class="card shadow-lg">
-                        <img src="{{ cat.image.url }}" class="card-img-top fixed-cat-img" alt="{{ cat.name }}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ cat.name }}</h5>
-                            <p class="card-text">{{ cat.breed }} - {{ cat.age }} years old</p>
-                            <a href="{% url 'adoption_request_create' cat.id %}" class="btn btn-warning">Adopt Me</a>
-                        </div>
+            <div class="col-md-4">
+                <article class="card cat-card mb-4">
+                    <img src="{{ cat.image.url }}" class="card-img-top fixed-cat-img" alt="{{ cat.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ cat.name }}</h5>
+                        <p class="card-text"><strong>Breed:</strong> {{ cat.breed }}<br><strong>Age:</strong> {{ cat.age }} years</p>
+                        <a href="{% url 'adoption_request_create' cat_id=cat.id %}" class="btn btn-success btn-sm">🏠 Adopt {{ cat.name }}</a>
                     </div>
-                </div>
+                </article>
+            </div>
             {% endfor %}
         </div>
-        <a href="{% url 'cat_list' %}" class="btn btn-primary mt-3">View More Cats</a>
+
+        <div class="text-center">
+            <a href="{% url 'cat_list' %}" class="btn btn-primary mt-3">View More Cats</a>
+        </div>
     </div>
 </section>
 
-<!-- Cat Care & Tips Carousel -->
-<section class="cat-care-tips bg-light py-5 text-center">
-    <div class="container">
-        <h2>Cat Care Tips 🐾</h2>
-        <div id="catCareCarousel" class="carousel slide" data-bs-ride="carousel">
+<!-- Cat Care Tips Carousel Section -->
+<section class="cat-care-tips bg-light" role="region" aria-labelledby="cat-care-tips-heading">
+    <div class="container text-center">
+        <h2 id="cat-care-tips-heading">Cat Care Tips 🐾</h2>
+
+        <div id="catCareCarousel" class="carousel slide" data-bs-ride="carousel" aria-label="Cat Care Tips Carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <h4>✅ Provide fresh water and nutritious food daily.</h4>
@@ -165,6 +168,7 @@
                     <h4>✅ Give them love, attention, and plenty of playtime.</h4>
                 </div>
             </div>
+
             <button class="carousel-control-prev" type="button" data-bs-target="#catCareCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon"></span>
             </button>
@@ -174,33 +178,4 @@
         </div>
     </div>
 </section>
-
-<!-- Footer -->
-<footer class="bg-dark text-white text-center py-4">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <h5>Contact Us</h5>
-                <p>Email: info@kittyconnect.com</p>
-                <p>Phone: +1 234 567 890</p>
-            </div>
-            <div class="col-md-4">
-                <h5>Quick Links</h5>
-                <ul class="list-unstyled">
-                    <li><a href="{% url 'home' %}" class="text-white">Home</a></li>
-                    <li><a href="{% url 'cat_list' %}" class="text-white">Available Cats</a></li>
-                </ul>
-            </div>
-            <div class="col-md-4">
-                <h5>Follow Us</h5>
-                <a href="#" class="text-white mx-2"><i class="fab fa-facebook"></i></a>
-                <a href="#" class="text-white mx-2"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="text-white mx-2"><i class="fab fa-twitter"></i></a>
-            </div>
-        </div>
-        <hr>
-        <p class="mb-0">© 2025 Kitty Connect | All Rights Reserved</p>
-    </div>
-</footer>
-
 {% endblock %}

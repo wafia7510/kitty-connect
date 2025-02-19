@@ -1,12 +1,32 @@
 {% extends 'base.html' %}
-{% block content %}
-<h2>Apply to Adopt {{ cat.name }}</h2>
-<form method="POST">
-    {% csrf_token %}
-    <label for="message">Message:</label>
-    <textarea name="message" placeholder="Why do you want to adopt this cat?" required></textarea>
-    <button type="submit">Submit Request</button>
-</form>
-<a href="{% url 'cat_list' %}">Back to Cats</a>
+{% load static %}
 
+{% block content %}
+<!-- Adoption Request Form Section -->
+<section class="adoption-form-section" role="region" aria-labelledby="adoption-form-heading">
+    <div class="container">
+        <h2 id="adoption-form-heading" class="text-center">Apply to Adopt {{ cat.name }}</h2>
+        
+        <div class="adoption-form-container">
+            <form method="POST" class="adoption-form">
+                {% csrf_token %}
+                
+                <!-- Message Input -->
+                <div class="form-group">
+                    <label for="message" class="form-label">Why do you want to adopt {{ cat.name }}?</label>
+                    <textarea id="message" name="message" class="form-control" 
+                              placeholder="Share your reasons..." required aria-required="true"></textarea>
+                </div>
+                
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-success">Submit Request</button>
+            </form>
+            
+            <!-- Back to Cats Button -->
+            <div class="text-center mt-3">
+                <a href="{% url 'cat_list' %}" class="btn btn-secondary">⬅️ Back to Cats</a>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

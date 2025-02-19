@@ -1,23 +1,64 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>My Adoption Requests</h2>
-<ul>
-    {% for request in requests %}
-        <li>
-            Request for <strong>{{ request.cat.name }}</strong> - Status: <strong>{{ request.status }}</strong>
-            
-            {% if not user.is_superuser and request.status == "Pending" %}
-                <a href="{% url 'adoption_request_cancel' request.id %}">Cancel Request</a>
-            {% endif %}
 
-            {% if user.is_superuser %}
-                <a href="{% url 'adoption_request_update' request.id %}">Manage</a>
-                <form method="POST" action="{% url 'adoption_request_delete' request.id %}" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit">Delete</button>
-                </form>
-            {% endif %}
-        </li>
-    {% endfor %}
-</ul>
+<section class="container mt-4" role="region" aria-labelledby="adoption-requests-heading">
+    <!-- Page Heading -->
+    <h2 id="adoption-requests-heading" class="text-center text-primary">
+        My Adoption Requests
+    </h2>
+
+    {% if requests %}
+        <ul class="list-group mt-3" role="list">
+            {% for request in requests %}
+                <li class="list-group-item d-flex justify-content-between align-items-center" 
+                    role="listitem" 
+                    aria-labelledby="request-{{ request.id }}">
+                    
+                    <!-- Cat Name & Status -->
+                    <span id="request-{{ request.id }}">
+                        Request for <strong>{{ request.cat.name }}</strong> 
+                        - Status: 
+                        <span class="badge {% if request.status == 'Pending' %}bg-warning text-dark
+                                              {% elif request.status == 'Approved' %}bg-success
+                                              {% elif request.status == 'Rejected' %}bg-danger
+                                              {% else %}bg-secondary{% endif %}">
+                            {{ request.status }}
+                        </span>
+                    </span>
+
+                    <!-- User Actions (Cancel for Regular Users) -->
+                    <div>
+                        {% if not user.is_superuser and request.status == "Pending" %}
+                            <a href="{% url 'adoption_request_cancel' request.id %}" 
+                               class="btn btn-danger btn-sm" 
+                               aria-label="Cancel adoption request for {{ request.cat.name }}">
+                                ❌ Cancel
+                            </a>
+                        {% endif %}
+
+                        <!-- Admin Actions (Manage & Delete) -->
+                        {% if user.is_superuser %}
+                            <a href="{% url 'adoption_request_update' request.id %}" 
+                               class="btn btn-warning btn-sm" 
+                               aria-label="Manage adoption request for {{ request.cat.name }}">
+                                ⚙️ Manage
+                            </a>
+                            <form method="POST" action="{% url 'adoption_request_delete' request.id %}" 
+                                  class="d-inline" 
+                                  aria-label="Delete adoption request for {{ request.cat.name }}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">🗑️ Delete</button>
+                            </form>
+                        {% endif %}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-center mt-3" role="alert" aria-live="polite">
+            You have no active adoption requests.
+        </p>
+    {% endif %}
+</section>
+
 {% endblock %}

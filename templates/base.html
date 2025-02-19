@@ -4,6 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Kitty Connect - Adopt a loving cat today! Browse available cats and give them a forever home.">
+    <meta name="keywords" content="cat adoption, adopt a cat, pet adoption, Kitty Connect">
+    <meta name="author" content="Kitty Connect Team">
+    
+    <!-- Open Graph Meta Tags (For Social Media) -->
+    <meta property="og:title" content="Kitty Connect - Find Your Purr-fect Companion!">
+    <meta property="og:description" content="Kitty Connect helps find loving homes for rescue cats. Browse, apply, and adopt your next feline friend.">
+    <meta property="og:image" content="{% static 'images/kitty-logo.png' %}">
+    <meta property="og:url" content="https://kittyconnect.com">
+    <meta property="og:type" content="website">
+
     <title>Kitty Connect</title>
 
     <!-- Bootstrap CSS -->
@@ -18,40 +31,37 @@
 <body>
 
     <!-- Header Section -->
-    <header>
-        <!-- Navigation Bar -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light" aria-label="Main Navigation">
+    <header role="banner">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" aria-label="Main Navigation">
             <div class="container">
                 <!-- Logo / Brand Name -->
-                <a class="navbar-brand" href="{% url 'home' %}">Kitty Connect</a>
+                <a class="navbar-brand" href="{% url 'home' %}" aria-label="Kitty Connect Home">
+                 Kitty Connect
+                </a>
 
                 <!-- Mobile Menu Toggle Button -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <!-- Navbar Links -->
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
-                        
-                        <!-- Always Visible Links -->
-                        <li class="nav-item"><a class="nav-link" href="{% url 'cat_list' %}">Available Cats</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#how-to-adopt">How to Adopt</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#cat-care-tips">Cat Care Tips</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'cat_list' %}" aria-label="View Available Cats">Available Cats</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#how-to-adopt" aria-label="Learn How to Adopt">How to Adopt</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#cat-care-tips" aria-label="View Cat Care Tips">Cat Care Tips</a></li>
 
                         {% if user.is_authenticated %}
                             {% if user.is_superuser %}
-                                <!-- Admin Links -->
-                                <li class="nav-item"><a class="nav-link" href="{% url 'admin_dashboard' %}">Admin Dashboard</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{% url 'admin_dashboard' %}" aria-label="Admin Dashboard">Admin Dashboard</a></li>
                             {% else %}
-                                <!-- Normal User Links -->
-                                <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">User Dashboard</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}" aria-label="User Dashboard">User Dashboard</a></li>
                             {% endif %}
-                            <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}" aria-label="Logout">Logout</a></li>
                         {% else %}
-                            <!-- Guest Links -->
-                            <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'login' %}" aria-label="Login">Login</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'register' %}" aria-label="Register">Register</a></li>
                         {% endif %}
                     </ul>
                 </div>
@@ -60,12 +70,12 @@
     </header>
 
     <!-- Main Content Area -->
-    <main class="container mt-4">
+    <main class="container mt-4" role="main">
         {% block content %}{% endblock %}
     </main>
 
     <!-- Footer Section -->
-    <footer class="bg-dark text-white text-center py-4" aria-label="Website Footer">
+    <footer class="bg-dark text-white text-center py-4" role="contentinfo" aria-label="Website Footer">
         <div class="container">
             <div class="row">
                 
@@ -80,14 +90,14 @@
                 <div class="col-md-4">
                     <h5>Quick Links</h5>
                     <ul class="list-unstyled">
-                        <li><a href="{% url 'home' %}" class="text-white">Home</a></li>
-                        <li><a href="{% url 'cat_list' %}" class="text-white">Available Cats</a></li>
-                        <li><a href="{% url 'home' %}#how-to-adopt" class="text-white">How to Adopt</a></li>
+                        <li><a href="{% url 'home' %}" class="text-white" aria-label="Go to Home">Home</a></li>
+                        <li><a href="{% url 'cat_list' %}" class="text-white" aria-label="View Available Cats">Available Cats</a></li>
+                        <li><a href="{% url 'home' %}#how-to-adopt" class="text-white" aria-label="Learn How to Adopt">How to Adopt</a></li>
                         {% if user.is_authenticated %}
                             {% if user.is_superuser %}
-                                <li><a href="{% url 'admin_dashboard' %}" class="text-white">Admin Dashboard</a></li>
+                                <li><a href="{% url 'admin_dashboard' %}" class="text-white" aria-label="Admin Dashboard">Admin Dashboard</a></li>
                             {% else %}
-                                <li><a href="{% url 'dashboard' %}" class="text-white">User Dashboard</a></li>
+                                <li><a href="{% url 'dashboard' %}" class="text-white" aria-label="User Dashboard">User Dashboard</a></li>
                             {% endif %}
                         {% endif %}
                     </ul>

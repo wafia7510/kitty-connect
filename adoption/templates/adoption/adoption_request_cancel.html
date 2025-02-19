@@ -1,12 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Cancel Adoption Request</h2>
-<p>Are you sure you want to cancel your adoption request for <strong>{{ adoption_request.cat.name }}</strong>?</p>
+<section class="container mt-4" role="main" aria-label="Cancel Adoption Request">
+    <h2>Cancel Adoption Request</h2>
+    <p>Are you sure you want to cancel your adoption request for <strong>{{ adoption_request.cat.name }}</strong>?</p>
 
-<form method="POST">
-    {% csrf_token %}
-    <button type="submit">Yes, Cancel Request</button>
-</form>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, Cancel Request</button>
+    </form>
 
-<a href="{% url 'adoption_request_list' %}">Back to My Requests</a>
+    <div class="mt-4">
+        <p>Where would you like to go next?</p>
+        <a href="{% url 'dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
+        <a href="{% url 'cat_list' %}" class="btn btn-primary">View Available Cats</a>
+    </div>
+</section>
 {% endblock %}

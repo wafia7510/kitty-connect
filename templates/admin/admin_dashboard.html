@@ -1,71 +1,84 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container mt-4">
-    <h2>Admin Dashboard - Manage Cats</h2>
-    
-    <a href="{% url 'cat_create' %}" class="btn btn-success mb-3">➕ Add New Cat</a>
-    
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Breed</th>
-                <th>Age</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for cat in cats %}
-                <tr>
-                    <td><img src="{{ cat.image.url }}" alt="{{ cat.name }}" width="80"></td>
-                    <td>{{ cat.name }}</td>
-                    <td>{{ cat.breed }}</td>
-                    <td>{{ cat.age }} years</td>
-                    <td>
-                        <a href="{% url 'cat_update' cat.id %}" class="btn btn-warning btn-sm">✏️ Edit</a>
-                        <form action="{% url 'cat_delete' cat.id %}" method="post" style="display:inline;">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-danger btn-sm">🗑️ Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            {% empty %}
-                <tr><td colspan="5" class="text-center">No cats available.</td></tr>
-            {% endfor %}
-        </tbody>
-    </table>
 
-    <h2>Manage Adoption Requests</h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Cat</th>
-                <th>User</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for request in adoption_requests %}
-                <tr>
-                    <td>{{ request.cat.name }}</td>
-                    <td>{{ request.user.username }}</td>
-                    <td>
-                        <span class="badge {% if request.status == 'Approved' %}bg-success{% elif request.status == 'Rejected' %}bg-danger{% else %}bg-warning{% endif %}">
-                            {{ request.status }}
-                        </span>
-                    </td>
-                    <td>
-                        <a href="{% url 'review_adoption_request' request.id %}" class="btn btn-primary btn-sm">📄 Review</a>
-                    </td>
-                </tr>
-            {% empty %}
-                <tr><td colspan="4">No adoption requests available.</td></tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    
+    <!-- Admin Dashboard Header -->
+    <header>
+        <h2 class="text-center text-primary">🐱 Admin Dashboard - Manage Cats</h2>
+    </header>
 
+    <!-- Add New Cat Button -->
+    <section>
+        <a href="{% url 'cat_create' %}" class="btn btn-success mb-3">➕ Add New Cat</a>
+    </section>
+
+    <!-- Cats Management Table -->
+    <section>
+        <table class="table table-striped table-bordered">
+            <caption>List of all registered cats available for adoption.</caption>
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Image</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Breed</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cat in cats %}
+                    <tr>
+                        <td><img src="{{ cat.image.url }}" alt="Image of {{ cat.name }}" width="80"></td>
+                        <td>{{ cat.name }}</td>
+                        <td>{{ cat.breed }}</td>
+                        <td>{{ cat.age }} years</td>
+                        <td>
+                            <a href="{% url 'cat_update' cat.id %}" class="btn btn-warning btn-sm" aria-label="Edit {{ cat.name }}">✏️ Edit</a>
+                            <form action="{% url 'cat_delete' cat.id %}" method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm" aria-label="Delete {{ cat.name }}">🗑️ Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr><td colspan="5" class="text-center">No cats available.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Adoption Requests Management -->
+    <section>
+        <h2 class="text-center text-primary">📋 Manage Adoption Requests</h2>
+        <table class="table table-bordered">
+            <caption>Review adoption requests submitted by users.</caption>
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Cat</th>
+                    <th scope="col">User</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for request in adoption_requests %}
+                    <tr>
+                        <td>{{ request.cat.name }}</td>
+                        <td>{{ request.user.username }}</td>
+                        <td>
+                            <span class="badge {% if request.status == 'Approved' %}bg-success{% elif request.status == 'Rejected' %}bg-danger{% else %}bg-warning{% endif %}">
+                                {{ request.status }}
+                            </span>
+                        </td>
+                        <td>
+                            <a href="{% url 'review_adoption_request' request.id %}" class="btn btn-primary btn-sm" aria-label="Review adoption request for {{ request.cat.name }}">📄 Review</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr><td colspan="4">No adoption requests available.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
 </div>
 {% endblock %}

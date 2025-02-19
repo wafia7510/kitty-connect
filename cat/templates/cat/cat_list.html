@@ -1,33 +1,95 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Available Cats for Adoption</h2>
-<ul>
-    {% for cat in cats %}
-    <li>
-        {{ cat.name }} - {{ cat.breed }} - {{ cat.age }} years old
 
-        {% if user.is_authenticated and not user.is_superuser %}
-            <a href="{% url 'adoption_request_create' cat_id=cat.id %}">Adopt {{ cat.name }}</a>
+<section class="container mt-4" role="region" aria-labelledby="available-cats-heading">
+    <h2 id="available-cats-heading" class="text-center">Available Cats for Adoption</h2>
 
-            {% if cat.id in favorite_cats %}
-                <!-- Already in Favorites (Disabled Button) -->
-                <button class="btn btn-secondary btn-sm" disabled>✅ Added to Favorites</button>
-            {% else %}
-                <!-- Add to Favorites Button -->
-                <form method="post" action="{% url 'add_to_favorites' cat.id %}" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-primary btn-sm favorite-btn">
-                        ❤️ Add to Favorites
-                    </button>
-                </form>
-            {% endif %}
-        {% endif %}
-    </li>
-{% endfor %}
+    <div class="row">
+        {% for cat in cats %}
+        <div class="col-md-4">
+            <!-- Individual Cat Card -->
+            <article class="card cat-card mb-4" role="article" aria-labelledby="cat-{{ cat.id }}-name">
+                
+                <!-- Cat Image -->
+                <figure>
+                    <img src="{{ cat.image.url }}" class="card-img-top fixed-cat-img" alt="Image of {{ cat.name }}">
+                </figure>
 
-</ul>
+                <div class="card-body">
+                    <h3 id="cat-{{ cat.id }}-name" class="card-title">{{ cat.name }}</h3>
+                    <p class="card-text">
+                        <strong>Breed:</strong> {{ cat.breed }}<br>
+                        <strong>Age:</strong> {{ cat.age }} years<br>
+                        <strong>Description:</strong> {{ cat.description }}
+                    </p>
 
-{% if user.is_superuser %}
-    <a href="{% url 'cat_create' %}">Add New Cat</a>
-{% endif %}
+                    <!-- User Actions (Aligned Properly) -->
+                    {% if user.is_authenticated and not user.is_superuser %}
+                    <div class="button-group">
+                        {% if cat.id in pending_requests %}
+                            <button class="btn btn-secondary btn-sm w-100" disabled aria-disabled="true">
+                                ⏳ Waiting for Approval
+                            </button>
+                        {% elif cat.id in recent_rejections %}
+                            <button class="btn btn-secondary btn-sm w-100" disabled aria-disabled="true">
+                                🚫 Cannot Reapply (6 months)
+                            </button>
+                        {% else %}
+                            <a href="{% url 'adoption_request_create' cat_id=cat.id %}" class="btn btn-success btn-sm w-100">
+                                🏠 Adopt {{ cat.name }}
+                            </a>
+                        {% endif %}
+                    </div>
+
+                    <div class="button-group">
+                        <!-- Favorite Button -->
+                        {% if cat.id in favorite_cats %}
+                            <button class="btn btn-secondary btn-sm w-100" disabled aria-disabled="true">
+                                ✅ Added to Favorites
+                            </button>
+                        {% else %}
+                            <form method="post" action="{% url 'add_to_favorites' cat.id %}" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary btn-sm w-100 favorite-btn" aria-label="Add {{ cat.name }} to Favorites">
+                                    ❤️ Add to Favorites
+                                </button>
+                            </form>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+
+                    <!-- Admin Actions -->
+                    {% if user.is_superuser %}
+                    <div class="button-group">
+                        <a href="{% url 'cat_update' cat.id %}" class="btn btn-warning btn-sm w-100">
+                            ✏️ Edit
+                        </a>
+                    </div>
+                    <div class="button-group">
+                        <form action="{% url 'cat_delete' cat.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm w-100" aria-label="Delete {{ cat.name }}">
+                                🗑️ Delete
+                            </button>
+                        </form>
+                    </div>
+                    {% endif %}
+                </div>
+            </article>
+        </div>
+        {% empty %}
+        <p class="text-center">No cats available for adoption at the moment.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Admin Add New Cat Button -->
+    {% if user.is_superuser %}
+        <div class="text-center mt-3">
+            <a href="{% url 'cat_create' %}" class="btn btn-warning" aria-label="Add New Cat">
+                ➕ Add New Cat
+            </a>
+        </div>
+    {% endif %}
+</section>
+
 {% endblock %}

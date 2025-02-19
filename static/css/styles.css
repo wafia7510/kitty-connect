@@ -1,23 +1,26 @@
-
-/* General Styles */
+/* =============== GENERAL STYLES =============== */
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f8f9fa;
     margin: 0;
     padding: 0;
+    color: #333;
 }
 
-/* Hero Section */
+/* =============== HERO SECTION (BANNER) =============== */
 .hero {
     background: url('/static/images/cat-paws.jpg') no-repeat center center/cover;
-    height: 80vh;
+    height: 75vh;
     display: flex;
     align-items: center;
     text-align: center;
+    justify-content: center;
+    color: white;
+    padding: 30px;
 }
 
 .hero h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: bold;
 }
 
@@ -28,35 +31,45 @@ body {
 .hero .btn {
     font-size: 1.2rem;
     padding: 12px 24px;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
-/* Section Titles */
+/* =============== NAVBAR =============== */
+.navbar {
+    background-color: #ffffff;
+    padding: 15px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.navbar-nav .nav-link {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* Navbar hover effect */
+.navbar-nav .nav-link:hover {
+    color: #007bff;
+}
+
+/* =============== SECTION HEADINGS =============== */
 h2 {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     font-weight: bold;
     color: #333;
-}
-
-/* What We Do & Why We Do */
-/* What We Do Section */
-.what-we-do {
-    background-color: #f9f9f9;  /* Light background */
-    border: 2px solid #ddd;  /* Border */
-    border-radius: 10px;  /* Rounded corners */
-    padding: 60px 20px;
-}
-
-.what-we-do h2 {
     text-align: center;
-    font-size: 2rem;
-    font-weight: bold;
-    color: #333;
+    margin-bottom: 25px;
 }
 
-.what-we-do p {
-    font-size: 1.2rem;
-    color: #555;
+/* =============== WHAT WE DO SECTION =============== */
+.what-we-do {
+    background-color: #f9f9f9;
+    padding: 60px 20px;
+    border-radius: 10px;
     text-align: center;
 }
 
@@ -73,42 +86,33 @@ h2 {
     border-radius: 10px;
     padding: 20px;
     text-align: center;
-    width: 300px;
+    width: 280px;
     min-height: 200px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     transition: 0.3s;
 }
 
 .service-box:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
 }
 
 .service-box i {
-    font-size: 2.5rem;
-    color: #e67e22; /* Orange color */
+    font-size: 2.2rem;
+    color: #e67e22;
 }
 
 .service-box h4 {
     margin-top: 15px;
     font-size: 1.5rem;
     font-weight: bold;
-    color: #333;
 }
 
-/* Why We Do Section */
+/* =============== WHY WE DO SECTION =============== */
 .why-we-do {
-    background-color: #d9d3ca; /* Clean background */
-    border: 2px solid #ddd; /* Subtle border */
-    border-radius: 10px; /* Rounded corners */
+    background-color: #d9d3ca;
     padding: 60px 20px;
-}
-
-.why-we-do h2 {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: bold;
-    color: #333;
+    border-radius: 10px;
 }
 
 .why-we-do-content {
@@ -122,167 +126,108 @@ h2 {
 
 .why-we-do img {
     width: 100%;
-    max-width: 500px;
+    max-width: 450px;
     border-radius: 10px;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
 }
 
-.why-we-do-text {
-    flex: 1;
-    max-width: 600px;
-}
-
-.why-we-do p {
-    font-size: 1.2rem;
-    color: #555;
-    text-align: justify;
-}
-
-.stats-container {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin-top: 30px;
-}
-
-.stat-box {
-    background: #f8f8f8;
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
-    width: 180px;
-    min-height: 140px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: 0.3s;
-}
-
-.stat-box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-}
-
-.stat-box i {
-    font-size: 2rem;
-    color: #3498db; /* Blue for icons */
-}
-
-.stat-box h3 {
-    margin-top: 10px;
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #333;
-}
-
-.stat-box p {
-    font-size: 1.1rem;
-    color: #555;
-    text-align: center;
-}
-
-
-/* How to Adopt Section */
-.how-to-adopt {
-    background-color: #93e2d2;  /* Light pastel blue */
-    padding: 60px 0;
-}
-
-.step {
-    background-color: white;
-    border-radius: 8px;
-    padding: 30px;
-    transition: transform 0.3s ease-in-out;
-}
-
-.step:hover {
-    transform: scale(1.05);
-}
-
-.step i {
-    color: #ff9800;
-}
-
-/* Meet Our Cats Section */
+/* =============== MEET OUR CATS SECTION =============== */
 .meet-cats {
     padding: 60px 0;
 }
 
-.card {
+/* Cat Cards Styling */
+.cat-card {
     border-radius: 10px;
     overflow: hidden;
-    transition: transform 0.3s ease-in-out;
+    padding: 15px;
+    text-align: center;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
 }
 
-.card:hover {
-    transform: scale(1.05);
-}
-
-.card-img-top.fixed-cat-img {
-    height: 250px;
+.cat-card img {
+    height: 220px;
     object-fit: cover;
+    border-radius: 10px;
 }
 
-/* View More Button */
-.meet-cats .btn {
-    font-size: 1.2rem;
-    padding: 10px 20px;
-}
-
-/* Cat Care Tips Carousel */
-.cat-care-tips {
-    padding: 60px 0;
-}
-
-.carousel-inner {
-    padding: 20px;
-    border: 3px solid #edc897; /* Light gray border */
-    border-radius: 15px; /* Rounded corners */
-    overflow: hidden;
-    background-color: white; /* Keeps it clean */
-}
-
-.carousel-item h4 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
-}
-/* Carousel Navigation Buttons */
-.carousel-control-prev, 
-.carousel-control-next {
-    background-color: rgba(0, 0, 0, 0.6); /* Dark semi-transparent background */
-    width: 50px;
-    height: 50px;
-    border-radius: 50%; /* Round shape */
+/* Buttons in the Cat Card */
+.card-buttons {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 20%; /* Centers the button vertically */
-    
-}
-/* Move Buttons Slightly Inward */
-.carousel-control-prev {
-        left: 10px;  /* Move inward */
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
 }
 
-.carousel-control-next {
-    right: 10px; /* Move inward */
-}
-/* Make the icons inside the buttons visible */
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    filter: invert(1); /* Makes the arrows white for better contrast */
-    width: 25px;
-    height: 25px;
+.cat-card .btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 0.9rem;
+    white-space: nowrap;
 }
 
+/* =============== DASHBOARD STYLING =============== */
+.dashboard-container {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
 
+/* Table Styling */
+.dashboard-table {
+    width: 100%;
+    background-color: white;
+    border-radius: 8px;
+    border-collapse: collapse;
+}
 
-/* Footer */
+.dashboard-table th,
+.dashboard-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Table Headers */
+.dashboard-table thead {
+    background-color: #007bff;
+    color: white;
+}
+
+/* =============== BUTTONS STYLING =============== */
+.btn {
+    font-weight: bold;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+/* =============== FOOTER =============== */
 footer {
     background-color: #343a40;
     color: white;
     padding: 40px 0;
+    text-align: center;
 }
 
 footer a {
@@ -301,36 +246,222 @@ footer .social-icons a {
 }
 
 footer hr {
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255,255,255,0.2);
 }
 
 footer p {
     margin-top: 20px;
 }
-.favorite-btn {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 5px 10px;
+
+/* =============== RESPONSIVE FIXES =============== */
+@media (max-width: 768px) {
+    .hero {
+        height: 60vh;
+    }
+
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    .why-we-do-content {
+        flex-direction: column;
+    }
+
+    .why-we-do img {
+        max-width: 100%;
+    }
+}
+/* ================== ADOPTION FORM STYLING ================== */
+.adoption-form-section {
+    background-color: #f5f5f5; /* Light grey background for separation */
+    padding: 50px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Form container */
+.adoption-form-container {
+    max-width: 500px;
+    background: white;
+    padding: 30px;
+    margin: auto;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+/* Form Group */
+.adoption-form .form-group {
+    margin-bottom: 20px;
+}
+
+/* Label styling */
+.adoption-form label {
+    font-weight: bold;
+    font-size: 1rem;
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+/* Textarea input */
+.adoption-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    min-height: 120px;
+    resize: vertical;
+    background-color: #f9f9f9;
+}
+
+/* Submit Button */
+.adoption-form button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: bold;
     border-radius: 5px;
     cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+/* Success Button */
+.adoption-form .btn-success {
+    background-color: #28a745;
+    border: none;
+    color: white;
+}
+
+.adoption-form .btn-success:hover {
+    background-color: #218838;
+}
+
+/* Back to Cats Button */
+.adoption-form .btn-secondary {
+    display: block;
+    text-align: center;
+    width: 100%;
+    background-color: #6c757d;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s ease-in-out;
+}
+
+.adoption-form .btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* ================== RESPONSIVENESS ================== */
+@media (max-width: 768px) {
+    .adoption-form-container {
+        width: 90%;
+    }
+}
+
+/* =============== CAT LIST PAGE =============== */
+.cat-card {
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 15px;
+    text-align: center;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: 0.3s;
 }
 
-.favorite-btn:hover {
+.cat-card img {
+    height: 220px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.cat-card .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.cat-card .card-text {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.4;
+}
+
+/* Buttons Styling */
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+/* Ensure buttons align properly */
+.cat-card .btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+/* Primary Button */
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+}
+
+.btn-primary:hover {
     background-color: #0056b3;
 }
 
-.remove-favorite-btn {
-    background-color: #dc3545;
-    color: white;
+/* Success Button */
+.btn-success {
+    background-color: #28a745;
     border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
 }
 
-.remove-favorite-btn:hover {
-    background-color: #a71d2a;
+.btn-success:hover {
+    background-color: #218838;
 }
+
+/* Secondary Button */
+.btn-secondary {
+    background-color: #6c757d;
+    border: none;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Warning Button */
+.btn-warning {
+    background-color: #ffc107;
+    border: none;
+    color: black;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+}
+
+/* Danger Button */
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+

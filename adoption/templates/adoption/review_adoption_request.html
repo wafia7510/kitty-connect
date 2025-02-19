@@ -1,33 +1,60 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2>Review Adoption Request</h2>
+<section class="container mt-4" role="region" aria-labelledby="review-adoption-heading">
+    <!-- Page Heading -->
+    <h2 id="review-adoption-heading" class="text-center text-primary">
+        Review Adoption Request
+    </h2>
 
-    <div class="card p-3">
-        <h4>🐱 Cat: {{ adoption_request.cat.name }}</h4>
+    <article class="card p-4 shadow-sm" role="article" aria-labelledby="cat-details-heading">
+        <!-- Cat Details -->
+        <header>
+            <h3 id="cat-details-heading">🐱 Cat: {{ adoption_request.cat.name }}</h3>
+        </header>
+
         <p><strong>Breed:</strong> {{ adoption_request.cat.breed }}</p>
         <p><strong>Age:</strong> {{ adoption_request.cat.age }} years</p>
-        <p><strong>User:</strong> {{ adoption_request.user.username }}</p>
-        <p><strong>Status:</strong> 
-            <span class="badge {% if adoption_request.status == 'Approved' %}bg-success{% elif adoption_request.status == 'Rejected' %}bg-danger{% else %}bg-warning{% endif %}">
+
+        <!-- User Details -->
+        <p><strong>Requested By:</strong> <span aria-label="Username">{{ adoption_request.user.username }}</span></p>
+        
+        <!-- Status Display with Color Badge -->
+        <p><strong>Current Status:</strong> 
+            <span class="badge {% if adoption_request.status == 'Approved' %}bg-success{% elif adoption_request.status == 'Rejected' %}bg-danger{% else %}bg-warning{% endif %}" 
+                  aria-label="Current request status">
                 {{ adoption_request.status }}
             </span>
         </p>
-        <p><strong>User Message:</strong> {{ adoption_request.message }}</p>
-        
-        <!-- ✅ FIX: Ensure 'Pending' condition is checked correctly -->
+
+        <!-- User Message -->
+        <p><strong>User Message:</strong> <q>{{ adoption_request.message }}</q></p>
+
+        <!-- ✅ Only show buttons if request is still 'Pending' -->
         {% if adoption_request.status|lower == "pending" %}
-            <form method="post">
+            <form method="post" aria-labelledby="review-action-form">
                 {% csrf_token %}
-                <button type="submit" name="action" value="approve" class="btn btn-success">✅ Approve</button>
-                <button type="submit" name="action" value="reject" class="btn btn-danger">❌ Reject</button>
+                <div class="d-flex gap-2">
+                    <button type="submit" name="action" value="approve" class="btn btn-success" 
+                            aria-label="Approve adoption request for {{ adoption_request.cat.name }}">
+                        ✅ Approve
+                    </button>
+                    <button type="submit" name="action" value="reject" class="btn btn-danger" 
+                            aria-label="Reject adoption request for {{ adoption_request.cat.name }}">
+                        ❌ Reject
+                    </button>
+                </div>
             </form>
         {% else %}
-            <p class="text-muted">This request has already been processed.</p>
+            <p class="text-muted" role="status" aria-live="polite">This request has already been processed.</p>
         {% endif %}
-    </div>
+    </article>
 
-    <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary mt-3">⬅ Back to Dashboard</a>
-</div>
+    <!-- Back to Dashboard Button -->
+    <footer class="mt-3">
+        <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary" aria-label="Back to admin dashboard">
+            ⬅ Back to Dashboard
+        </a>
+    </footer>
+</section>
 {% endblock %}

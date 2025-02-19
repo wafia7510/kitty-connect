@@ -1,9 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Are you sure you want to delete this adoption request for {{ adoption_request.cat.name }}?</h2>
-<form method="POST">
-    {% csrf_token %}
-    <button type="submit">Yes, Delete</button>
-</form>
-<a href="{% url 'adoption_request_list' %}">Cancel</a>
+<section class="container mt-4" role="region" aria-labelledby="adoption-cancel-heading">
+    <!-- Page Heading -->
+    <h2 id="adoption-cancel-heading" class="text-center text-danger">
+        Adoption Request Canceled
+    </h2>
+
+    <article class="card p-4 shadow-lg mt-3" role="article" aria-labelledby="cat-name-heading">
+        <h3 id="cat-name-heading" class="text-center text-primary">
+            {{ cat_name }} has been removed from your adoption requests list.
+        </h3>
+        <p class="text-center">
+            Your adoption request has been successfully canceled.
+        </p>
+
+        <!-- Button to Redirect User to Cat List -->
+        <div class="text-center">
+            <a href="{% url 'cat_list' %}" class="btn btn-primary" aria-label="View Available Cats">
+                🐾 View Available Cats
+            </a>
+        </div>
+    </article>
+</section>
 {% endblock %}

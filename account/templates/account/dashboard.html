@@ -1,63 +1,101 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container mt-4">
-    <h2>Welcome, {{ user.username }}!</h2>
+    <h2 class="text-center">Welcome, {{ user.username }}! 😺</h2>
 
     <!-- Adoption Requests -->
-    <h3>Your Adoption Requests</h3>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Cat</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for request in adoption_requests %}
-                <tr>
-                    <td>{{ request.cat.name }}</td>
-                    <td>{{ request.status }}</td>
-                    <td>
-                        {% if request.status == "Pending" %}
-                            <form action="{% url 'adoption_request_cancel' request.id %}" method="post">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-danger btn-sm">Cancel</button>
-                            </form>
-                        {% endif %}
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="card dashboard-card">
+        <div class="card-header bg-primary text-white">
+            <h4>Your Adoption Requests</h4>
+        </div>
+        <div class="card-body">
+            {% if adoption_requests %}
+                <table class="table dashboard-table">
+                    <thead>
+                        <tr>
+                            <th>Cat</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for request in adoption_requests %}
+                        <tr>
+                            <td>{{ request.cat.name }}</td>
+                            <td>
+                                {% if request.status == "Pending" %}
+                                    <span class="badge bg-warning text-dark">Pending</span>
+                                {% elif request.status == "Approved" %}
+                                    <span class="badge bg-success">Approved</span>
+                                {% elif request.status == "Rejected" %}
+                                    <span class="badge bg-danger">Rejected</span>
+                                {% else %}
+                                    <span class="badge bg-secondary">{{ request.status }}</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if request.status|lower == "pending" %}
+                                    <a href="{% url 'adoption_request_cancel' request.id %}" class="btn btn-danger btn-sm">
+                                                    ❌ Cancel
+                                    </a>
+                                {% else %}
+                                    <button class="btn btn-secondary btn-sm" disabled>🔒 No Actions</button>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="text-center">You have no adoption requests.</p>
+            {% endif %}
+        </div>
+    </div>
 
     <!-- Adoption History -->
-    <h3>Adoption History</h3>
-    <ul>
-        {% for cat in adopted_cats %}
-            <li>{{ cat.cat.name }} - Adopted!</li>
-        {% empty %}
-            <p>No past adoptions.</p>
-        {% endfor %}
-    </ul>
+    <div class="card dashboard-card">
+        <div class="card-header bg-success text-white">
+            <h4>Adoption History</h4>
+        </div>
+        <div class="card-body">
+            {% if adopted_cats %}
+                <ul class="list-group">
+                    {% for cat in adopted_cats %}
+                        <li class="list-group-item">
+                            <strong>{{ cat.cat.name }}</strong> - Adopted! 🎉
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-center">No past adoptions.</p>
+            {% endif %}
+        </div>
+    </div>
 
     <!-- Wishlist (Favorite Cats) -->
-    <h3>Wishlist (Favorite Cats)</h3>
-    <ul>
-        {% for favorite in favorite_cats %}
-            <li>
-                {{ favorite.cat.name }} 
-                <form action="{% url 'remove_from_favorites' favorite.cat.id %}" method="post" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-sm btn-danger remove-favorite-btn">
-                        ❌ Remove
-                    </button>
-                </form>
-            </li>
-        {% empty %}
-            <p>No favorite cats yet.</p>
-        {% endfor %}
-    </ul>
-    
+    <div class="card dashboard-card">
+        <div class="card-header bg-info text-white">
+            <h4>Wishlist (Favorite Cats)</h4>
+        </div>
+        <div class="card-body">
+            {% if favorite_cats %}
+                <ul class="list-group">
+                    {% for favorite in favorite_cats %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>{{ favorite.cat.name }}</span>
+                            <form action="{% url 'remove_from_favorites' favorite.cat.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    ❌ Remove
+                                </button>
+                            </form>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-center">No favorite cats yet.</p>
+            {% endif %}
+        </div>
+    </div>
 </div>
 {% endblock %}
