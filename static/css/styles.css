@@ -1,7 +1,7 @@
 /* =============== GENERAL STYLES =============== */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa;
+    background-color: #f5f2ec9d;
     margin: 0;
     padding: 0;
     color: #333;
@@ -15,7 +15,7 @@ body {
     align-items: center;
     text-align: center;
     justify-content: center;
-    color: white;
+    color: rgb(43, 41, 41);
     padding: 30px;
 }
 
@@ -33,7 +33,16 @@ body {
     padding: 12px 24px;
     margin-top: 15px;
 }
-
+@media (max-width:390px) {
+    .hero h1 {
+        margin: 10px auto 0;
+        font-size: 1.6rem;
+        
+    }
+    
+    
+    
+}
 /* =============== NAVBAR =============== */
 .navbar {
     background-color: #ffffff;
@@ -51,7 +60,6 @@ body {
     font-weight: 500;
 }
 
-/* Navbar hover effect */
 .navbar-nav .nav-link:hover {
     color: #007bff;
 }
@@ -71,8 +79,10 @@ h2 {
     padding: 60px 20px;
     border-radius: 10px;
     text-align: center;
+    margin-top: 10px;
 }
 
+/* Service Boxes */
 .service-container {
     display: flex;
     justify-content: center;
@@ -98,7 +108,7 @@ h2 {
 }
 
 .service-box i {
-    font-size: 2.2rem;
+    font-size: 2.5rem;
     color: #e67e22;
 }
 
@@ -108,65 +118,227 @@ h2 {
     font-weight: bold;
 }
 
+
 /* =============== WHY WE DO SECTION =============== */
 .why-we-do {
-    background-color: #d9d3ca;
-    padding: 60px 20px;
+    position: relative;
+    padding: 80px 0;
     border-radius: 10px;
-}
-
-.why-we-do-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 40px;
-    margin-top: 30px;
-}
-
-.why-we-do img {
-    width: 100%;
-    max-width: 450px;
-    border-radius: 10px;
-    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
-}
-
-/* =============== MEET OUR CATS SECTION =============== */
-.meet-cats {
-    padding: 60px 0;
-}
-
-/* Cat Cards Styling */
-.cat-card {
-    border-radius: 10px;
-    overflow: hidden;
-    padding: 15px;
+    color: rgb(16, 15, 15); /* Ensures text is readable on background */
     text-align: center;
-    background: white;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: 0.3s;
-}
-
-.cat-card img {
-    height: 220px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-/* Buttons in the Cat Card */
-.card-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
     margin-top: 10px;
 }
 
-.cat-card .btn {
+/* Add a transparent background image */
+.why-we-do::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    padding: 10px;
-    font-size: 0.9rem;
-    white-space: nowrap;
+    height: 100%;
+    background: url('/static/images/nature.jpg') no-repeat center center/cover;
+    opacity: 0.3; /* Adjust transparency (0.1 to 1) */
+    z-index: 1;
 }
+
+/* Ensure content is above the background */
+.why-we-do .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Image Container */
+.why-we-do-image img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Text and Stats Container */
+.why-we-do-text {
+    text-align: center;
+    padding: 20px;
+}
+
+/* Statistics */
+.stats-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.stat-box {
+    background: white; /* Semi-transparent white */
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    width: 120px;
+    min-height: 120px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    color: rgb(12, 11, 11);
+}
+
+.stat-box i {
+    font-size: 2rem;
+    color: #ffcc00; /* Golden color for icons */
+}
+
+.stat-box h3 {
+    margin-top: 10px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: rgb(19, 18, 18);
+}
+
+.stat-box p {
+    font-size: 1.1rem;
+    color: #0f0e0e;
+}
+
+/* Responsive Fix */
+@media (max-width: 768px) {
+    .why-we-do .row {
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+}
+
+/* =============== HOW TO ADOPT SECTION =============== */
+.how-to-adopt {
+    background-color: #f9f9f9;
+    padding: 50px 15px;
+    border-radius: 10px;
+    text-align: center;
+    border: 3px solid #95e7e9; /* Subtle blue border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
+    margin-top: 20px;
+}
+
+/* Step Cards */
+.step {
+    background: rgb(209, 230, 237);
+    border-radius: 8px;
+    padding: 25px;
+    transition: transform 0.3s ease-in-out;
+    border: 2px solid #ccc; /* Light border for each step */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    min-height: 200px; /* Ensure even height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Step Hover Effect */
+.step:hover {
+    transform: scale(1.05);
+    border-color: #065063; /* Highlight effect */
+}
+
+/* Step Icons */
+.step i {
+    color: #335d65;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+/* Step Titles */
+.step h4 {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+/* Responsive Fix */
+@media (max-width: 768px) {
+    .how-to-adopt {
+        padding: 40px 10px;
+    }
+
+    .step {
+        min-height: auto;
+    }
+}
+
+/* =============== CAT CARE TIPS SECTION (UPDATED) =============== */
+.cat-care-tips {
+    background: linear-gradient(to bottom, #fde2e4, #fad2e1); /* Light pink gradient */
+    padding: 60px 0;
+    text-align: center;
+    position: relative;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+/* Heading */
+.cat-care-tips h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Carousel */
+.carousel-inner {
+    padding: 20px;
+    border: 4px solid #f5b5c4; /* Soft pink border */
+    border-radius: 15px;
+    background-color: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Carousel Items */
+.carousel-item h4 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    padding: 15px;
+}
+
+/* Navigation Buttons */
+.carousel-control-prev,
+.carousel-control-next {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease-in-out;
+    position: absolute;
+    top: 30px;
+}
+.carousel-control-prev{
+    left: 10px;
+}
+.carousel-control-next{
+    right: 10px;
+}
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* =============== RESPONSIVENESS =============== */
+@media (max-width: 768px) {
+    .cat-care-tips {
+        padding: 40px 0;
+    }
+
+    .carousel-item h4 {
+        font-size: 1.3rem;
+    }
+    .carousel-control-prev,.carousel-control-next{
+        display: none;
+    } 
+    
+}
+
 
 /* =============== DASHBOARD STYLING =============== */
 .dashboard-container {
@@ -174,6 +346,7 @@ h2 {
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 10px auto;
 }
 
 /* Table Styling */
@@ -182,6 +355,7 @@ h2 {
     background-color: white;
     border-radius: 8px;
     border-collapse: collapse;
+    
 }
 
 .dashboard-table th,
@@ -197,37 +371,14 @@ h2 {
     color: white;
 }
 
-/* =============== BUTTONS STYLING =============== */
-.btn {
-    font-weight: bold;
-    border-radius: 5px;
-    transition: 0.3s;
-}
-
-.btn-primary {
-    background-color: #007bff;
-    border: none;
-}
-
-.btn-primary:hover {
-    background-color: #0056b3;
-}
-
-.btn-success {
-    background-color: #28a745;
-    border: none;
-}
-
-.btn-success:hover {
-    background-color: #218838;
-}
-
 /* =============== FOOTER =============== */
 footer {
     background-color: #343a40;
     color: white;
     padding: 40px 0;
     text-align: center;
+    margin-bottom: 0;
+    margin-top: 65px;
 }
 
 footer a {
@@ -275,22 +426,196 @@ footer p {
         max-width: 100%;
     }
 }
+
+/* =============== CAT LIST PAGE =============== */
+.cat-card {
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 15px;
+    text-align: center;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+}
+
+.cat-card img {
+    height: 220px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.cat-card .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.cat-card .card-text {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.4;
+}
+
+/* Ensure buttons align properly */
+.card-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.cat-card .btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+/* =============== BUTTONS STYLING =============== */
+.btn {
+    font-weight: bold;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border: none;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    border: none;
+    color: black;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* =============== MEET OUR CATS SECTION =============== */
+.meet-cats {
+    padding: 60px 0;
+    background-color: #f9f9f9;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Cat Cards Styling */
+.cat-card {
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    
+}
+
+/* Uniform Image Size */
+.cat-card img {
+    width: 100%;  /* Ensures full width */
+    height: 250px; /* Fixed height */
+    object-fit: cover; /* Ensures proper scaling */
+    border-radius: 10px 10px 0 0;
+}
+
+/* Card Body Styling */
+.cat-card .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 20px;
+}
+
+/* Title Styling */
+.cat-card .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    margin-top: auto;
+}
+
+/* Description Styling */
+.cat-card .card-text {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.4;
+    margin-bottom: 10px;
+}
+
+/* Button Styling */
+.cat-card .btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    margin-top: .5rem;
+}
+
+/* Responsive Fix */
+@media (max-width: 768px) {
+    .meet-cats {
+        padding: 40px 0;
+    }
+
+    .cat-card img {
+        height: 220px; /* Adjusted image height for smaller screens */
+    }
+}
 /* ================== ADOPTION FORM STYLING ================== */
 .adoption-form-section {
-    background-color: #f5f5f5; /* Light grey background for separation */
-    padding: 50px 0;
+    background: linear-gradient(to bottom, #fce4ec, #f8bbd0); /* Soft pink gradient */
+    padding: 60px 0;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* Form container */
+/* Form Container */
 .adoption-form-container {
     max-width: 500px;
     background: white;
     padding: 30px;
     margin: auto;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     border: 1px solid #ddd;
 }
@@ -300,7 +625,7 @@ footer p {
     margin-bottom: 20px;
 }
 
-/* Label styling */
+/* Label Styling */
 .adoption-form label {
     font-weight: bold;
     font-size: 1rem;
@@ -309,7 +634,7 @@ footer p {
     color: #333;
 }
 
-/* Textarea input */
+/* Textarea Input */
 .adoption-form textarea {
     width: 100%;
     padding: 10px;
@@ -367,101 +692,65 @@ footer p {
         width: 90%;
     }
 }
+/* ================== AUTH FORMS STYLING (LOGIN & REGISTER) ================== */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    background: linear-gradient(to bottom, #f8bbd0, #fce4ec); /* Soft pink gradient */
+    padding: 20px;
+}
 
-/* =============== CAT LIST PAGE =============== */
-.cat-card {
-    border-radius: 10px;
-    overflow: hidden;
-    padding: 15px;
-    text-align: center;
+/* Login & Register Card */
+.auth-card {
     background: white;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 400px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Form Labels */
+.auth-card label {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Input Fields */
+.auth-card input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+}
+
+/* Submit Button */
+.auth-card .btn-primary {
+    background-color: #007bff;
+    color: white;
+    font-size: 1.1rem;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
     transition: 0.3s;
 }
 
-.cat-card img {
-    height: 220px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-.cat-card .card-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.cat-card .card-text {
-    font-size: 1rem;
-    color: #555;
-    line-height: 1.4;
-}
-
-/* Buttons Styling */
-.button-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 10px;
-}
-
-/* Ensure buttons align properly */
-.cat-card .btn {
-    width: 100%;
-    padding: 10px;
-    font-size: 0.9rem;
-    white-space: nowrap;
-}
-
-/* Primary Button */
-.btn-primary {
-    background-color: #007bff;
-    border: none;
-}
-
-.btn-primary:hover {
+.auth-card .btn-primary:hover {
     background-color: #0056b3;
 }
 
-/* Success Button */
-.btn-success {
-    background-color: #28a745;
-    border: none;
+.form-label{
+    text-align: left;
 }
 
-.btn-success:hover {
-    background-color: #218838;
+/* Responsive Fix */
+@media (max-width: 768px) {
+    .auth-card {
+        width: 90%;
+    }
 }
-
-/* Secondary Button */
-.btn-secondary {
-    background-color: #6c757d;
-    border: none;
-}
-
-.btn-secondary:hover {
-    background-color: #5a6268;
-}
-
-/* Warning Button */
-.btn-warning {
-    background-color: #ffc107;
-    border: none;
-    color: black;
-}
-
-.btn-warning:hover {
-    background-color: #e0a800;
-}
-
-/* Danger Button */
-.btn-danger {
-    background-color: #dc3545;
-    border: none;
-}
-
-.btn-danger:hover {
-    background-color: #c82333;
-}
-

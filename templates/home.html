@@ -45,76 +45,80 @@
 <!-- Why We Do Section -->
 <section class="why-we-do" role="region" aria-labelledby="why-we-do-heading">
     <div class="container">
-        <h2 id="why-we-do-heading" class="text-center">🐾 Why We Do This</h2>
-
-        <div class="why-we-do-content">
-            <div class="why-we-do-text">
-                <p>Every cat deserves a second chance at love and happiness. Through adoption, we help them find their forever homes and bring joy to families.</p>
-                
-                <!-- Statistics Section -->
-                <div class="stats-container">
-                    <div class="stat-box">
-                        <i class="fas fa-cat" aria-hidden="true"></i>
-                        <h3>5,000+</h3>
-                        <p>Cats Rescued</p>
-                    </div>
-                    <div class="stat-box">
-                        <i class="fas fa-home" aria-hidden="true"></i>
-                        <h3>3,800+</h3>
-                        <p>Cats Adopted</p>
-                    </div>
-                    <div class="stat-box">
-                        <i class="fas fa-heart" aria-hidden="true"></i>
-                        <h3>200+</h3>
-                        <p>Happy Families</p>
-                    </div>
-                </div>
-
-                <p class="lead mt-3">"A cat's love is unconditional – adopt and change a life today!"</p>
+        <div class="row align-items-center">
+            <!-- Left Side: Cat Image -->
+            <div class="col-md-6">
+                <figure class="why-we-do-image">
+                    <img src="{% static 'images/adopted-cat.jpg' %}" alt="Happy adopted cat" class="img-fluid rounded">
+                </figure>
             </div>
 
-            <!-- Image Representation -->
-            <div>
-                <img src="{% static 'images/adopted-cat.jpg' %}" alt="Happy adopted cat" class="img-fluid">
+            <!-- Right Side: Heading, Text & Stats -->
+            <div class="col-md-6">
+                <div class="why-we-do-text">
+                    <h2 id="why-we-do-heading" class="text-center">🐾 Why We Do This</h2>
+                    <p>Every cat deserves a second chance at love and happiness. Through adoption, we help them find their forever homes and bring joy to families.</p>
+                    
+                    <!-- Statistics Section -->
+                    <div class="stats-container">
+                        <div class="stat-box">
+                            <i class="fas fa-cat" aria-hidden="true"></i>
+                            <h3>5,000+</h3>
+                            <p>Cats Rescued</p>
+                        </div>
+                        <div class="stat-box">
+                            <i class="fas fa-home" aria-hidden="true"></i>
+                            <h3>3,800+</h3>
+                            <p>Cats Adopted</p>
+                        </div>
+                        <div class="stat-box">
+                            <i class="fas fa-heart" aria-hidden="true"></i>
+                            <h3>200+</h3>
+                            <p>Happy Families</p>
+                        </div>
+                    </div>
+                    <p class="lead mt-3">"A cat's love is unconditional – adopt and change a life today!"</p>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
+
+<!-- How to Adopt Section -->
 <!-- How to Adopt Section -->
 <section class="how-to-adopt bg-light" role="region" aria-labelledby="how-to-adopt-heading">
     <div class="container text-center">
         <h2 id="how-to-adopt-heading">How to Adopt? 🐾</h2>
 
-        <div class="row">
-            <div class="col-md-3">
+        <div class="row justify-content-center">
+            <!-- Browse Cats (Scrolls to Meet Our Cats Section) -->
+            <div class="col-md-4">
                 <article class="step">
-                    <i class="fas fa-search" aria-hidden="true"></i>
-                    <h4>1. Browse Cats</h4>
-                    <p>Find your perfect match.</p>
+                    <a href="#meet-our-cats-heading" class="text-decoration-none text-dark">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                        <h4>1. Browse Cats</h4>
+                        <p>Find your perfect match.</p>
+                    </a>
                 </article>
             </div>
 
-            <div class="col-md-3">
+            <!-- Apply (Redirects to Cat List Page) -->
+            <div class="col-md-4">
                 <article class="step">
-                    <i class="fas fa-file-alt" aria-hidden="true"></i>
-                    <h4>2. Apply</h4>
-                    <p>Submit an adoption request.</p>
+                    <a href="{% url 'cat_list' %}" class="text-decoration-none text-dark">
+                        <i class="fas fa-file-alt" aria-hidden="true"></i>
+                        <h4>2. Apply</h4>
+                        <p>Submit an adoption request.</p>
+                    </a>
                 </article>
             </div>
 
-            <div class="col-md-3">
-                <article class="step">
-                    <i class="fas fa-calendar-check" aria-hidden="true"></i>
-                    <h4>3. Meet & Greet</h4>
-                    <p>Schedule a visit.</p>
-                </article>
-            </div>
-
-            <div class="col-md-3">
+            <!-- Take Home -->
+            <div class="col-md-4">
                 <article class="step">
                     <i class="fas fa-home" aria-hidden="true"></i>
-                    <h4>4. Take Home</h4>
+                    <h4>3. Take Home</h4>
                     <p>Welcome your new friend!</p>
                 </article>
             </div>
@@ -122,11 +126,11 @@
     </div>
 </section>
 
+
 <!-- Meet Our Cats Section -->
 <section class="meet-cats" role="region" aria-labelledby="meet-our-cats-heading">
     <div class="container">
         <h2 id="meet-our-cats-heading" class="text-center">😻 Meet Our Cats</h2>
-
         <div class="row">
             {% for cat in cats|slice:":3" %}
             <div class="col-md-4">
