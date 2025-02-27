@@ -1,1 +1,1 @@
-web: gunicorn kittyconnect.wsgi:application
+web: gunicorn kittyconnect.wsgi:application --log-file -
