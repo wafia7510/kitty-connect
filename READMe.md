@@ -1,200 +1,285 @@
 
 # **🐾 Kitty Connect** – *Find Your Purr-fect Companion!*
 
-### **📍 Project Overview**
-Kitty Connect is a **Django-powered** full-stack web application that simplifies **cat adoption** by providing a seamless platform where users can **browse, favorite, apply for adoption, and track adoption requests** while **admins manage cats and adoption approvals**. The project follows an **MVC (Model-View-Controller) pattern**, incorporating authentication, role-based access, and business logic to ensure smooth operations.
+Kitty Connect is a full-stack web application built with Django that connects cat lovers with adoptable cats. The platform enables users to browse available cats, apply for adoption, manage favorites, and track their adoption requests. Administrators can manage cat listings and process adoption requests.
 
 ---
 
-## **🚀 Features**
-### **For Users**
-✅ Browse available cats for adoption  
-✅ View cat details (image, age, breed, description)  
-✅ Apply for adoption with a message  
-✅ Track adoption request status  
-✅ Favorite/Wishlist feature to save cats for later  
-✅ View past adoption history  
-✅ Secure user authentication (Register/Login/Logout)  
-
-### **For Admins**
-✅ Add, edit, and delete cat listings  
-✅ Manage adoption requests (approve/reject)  
-✅ Remove an adopted cat from availability  
-✅ Prevent users from reapplying for rejected cats for **6 months**  
-✅ Auto-redirect admins to **admin dashboard** upon login  
-
----
-
-## **💻 Tech Stack**
-✅ **Frontend:** HTML, CSS, Bootstrap  
-✅ **Backend:** Python + Django  
-✅ **Database:** SQLite (upgradable to PostgreSQL/MySQL)  
-✅ **Authentication:** Django’s built-in authentication  
-✅ **Deployment:** Will be cloud-hosted (TBD)  
-✅ **Version Control:** Git & GitHub  
+## Table of Contents
+1. [Project Overview](#project-overview)
+2. [Target Audience](#target-audience)
+3. [Wireframes & User Flow](#wireframes--user-flow)
+4. [Features](#features)
+5. [Technology Stack](#technology-stack)
+6. [Database Schema](#database-schema)
+7. [Installation & Setup](#installation--setup)
+8. [Testing](#testing)
+9. [Deployment](#deployment)
+10. [Content & Media](#content--media)
+11. [Credits & Acknowledgements](#credits--acknowledgements)
+12. [Future Improvements](#future-improvements)
+13. [License](#license)
+14. [Contact](#contact)
 
 ---
 
-## **📂 Project Structure**
-```
-KittyConnect/
-│── accounts/                # User authentication & dashboard
-│── cats/                    # Cat model & listing functionalities
-│── adoption/                # Adoption request handling
-│── static/                  # CSS, images, JavaScript files
-│── templates/               # HTML templates for the website
-│── manage.py                # Django management script
-│── db.sqlite3               # Database (default: SQLite)
-│── README.md                # Project documentation
-│── requirements.txt         # Project dependencies
-```
+## Project Overview
+Kitty Connect is designed to simplify the cat adoption process. The application allows users to:
+- **Browse:** View a curated list of adoptable cats with images, breed, age, and detailed descriptions.
+- **Apply:** Submit adoption requests with personalized messages.
+- **Track:** Monitor the status of their requests via a user dashboard.
+- **Favorite:** Save cats they are interested in to a wishlist.
+
+Administrators have access to an admin dashboard where they can:
+- **Manage Cat Listings:** Add, update, or remove cats from the platform.
+- **Process Requests:** Approve or reject adoption requests.
+- **Maintain Integrity:** Ensure that adopted cats are removed from the available listings and restrict reapplication for rejected cats for a specified period (6 months).
 
 ---
 
-## **⚙️ Installation & Setup**
-To run this project locally, follow these steps:
-
-### **1️⃣ Clone the Repository**
-```bash
-git clone https://github.com/yourusername/KittyConnect.git
-cd KittyConnect
-```
-
-### **2️⃣ Create & Activate a Virtual Environment**
-```bash
-# On Windows
-python -m venv venv
-venv\Scripts\activate
-
-# On Mac/Linux
-python3 -m venv venv
-source venv/bin/activate
-```
-
-### **3️⃣ Install Dependencies**
-```bash
-pip install -r requirements.txt
-```
-
-### **4️⃣ Apply Database Migrations**
-```bash
-python manage.py makemigrations
-python manage.py migrate
-```
-
-### **5️⃣ Create a Superuser (for Admin Access)**
-```bash
-python manage.py createsuperuser
-```
-Follow the prompts to create an admin account.
-
-### **6️⃣ Run the Server**
-```bash
-python manage.py runserver
-```
-Visit `http://127.0.0.1:8000/` in your browser.
+## Target Audience
+- **Cat Lovers:** Individuals or families looking to adopt a cat.
+- **Animal Shelters & Rescue Organizations:** Entities wanting to list cats available for adoption.
+- **Administrators:** Site managers responsible for overseeing adoption requests and managing cat listings.
 
 ---
 
-## **🛠️ Admin Panel Access**
-To access the Django Admin Panel:
-1. **Login as a superuser** (`http://127.0.0.1:8000/admin`)
-2. **Manage cat listings & adoption requests**
+## Wireframes & User Flow
+### Wireframes
+Wireframes were created to establish the layout and structure of key pages:
+- **Homepage:** Features a hero banner, sections for "What We Do," "Why We Do," "How to Adopt," "Meet Our Cats," and "Cat Care Tips."
+![Homepage](docs/kitty-home.png)
+![Homepage](docs/kitty-home-2.png)
+![Homepage](docs/kitty-home-3.png)
+![Homepage](docs/kitty-home-4.png)
+![Homepage](docs/kitty-home-5.png)
+![Homepage](docs/kitty-home-6.png)
+- **Cat List Page:** Displays a grid of cat cards with filters and action buttons.
+![Available Cat Page](docs/Available-Cats.png)
+- **Log in Form Page:** Contains a simple form for users to login kitty connect.
+![Login Page](docs/login.png)
+- **Sign up page:** Contains a simple form for users to register in kitty connect.
+![Login Page](docs/create-account.png)
+
+
+*
+
+### User Flow Diagrams
+User flow diagrams map the steps a user takes:
+- **User Journey:** From browsing cats to submitting an adoption request, tracking its status, and managing favorites.
+
+                       +----------------+
+                       |   Homepage     |
+                       +----------------+
+                              |
+              +---------------+----------------+
+              |                                |
+              v                                v
+       +-------------+                 +-----------------+
+       | Register /  |                 |   Login         |
+       |  Login      |                 +-----------------+
+       +-------------+
+              |
+              v
+       +-----------------------+
+       | Browse Available Cats |
+       +-----------------------+
+              |
+              v
+       +-----------------------+
+       |   Cat List Page       |
+       +-----------------------+
+                        |
+              +---------+---------+
+              |                   |
+              v                   v
+           +----------+   +------------------+
+           | View Cat |   |  Add to Favorites|
+           | Details  |   +------------------+
+           +----------+
+                 |
+                 v
+             +---------------------------+
+             | Adoption Request Form     |
+             | (Apply for Adoption)      |
+             +---------------------------+
+                         |
+                         v
+        +---------------------------+
+        | Submit Adoption Request   |
+        +---------------------------+
+                  |
+                  v
+        +---------------------------+
+        |   User Dashboard          |
+        | (Track Requests, History, |
+        |  Manage Favorites)        |
+        +---------------------------+
+
+      
+
+
+- **Admin Flow:** From logging into the admin dashboard to managing cat listings and processing requests.
+
+                        +----------------+
+                        |  Admin Login   |
+                        +----------------+
+                              |
+                              v
+                        +----------------+
+                        | Admin Dashboard|
+                        +----------------+
+                              |
+               +--------------+--------------+
+               |                             |
+               v                             v
+       +-----------------+          +-------------------------+
+       | Manage Cats     |          | Manage Adoption Requests|
+       | (Create/Edit/Delete)      | (Review, Approve, Reject)|
+       +-----------------+          +-------------------------+
+
 
 ---
 
-## **📜 Database & Models**
-The application uses Django's **ORM (Object Relational Mapper)** to handle data storage.  
+## Features
+### For Users
+- **User Authentication:** Registration, login, logout, and role-based access.
+- **Cat Listings:** Browse adoptable cats with images, breed, age, and detailed descriptions.
+- **Adoption Request:** Submit an adoption request with a custom message.
+- **Favorites:** Save cats to a wishlist for future reference.
+- **User Dashboard:** View active requests, adoption history, and favorite cats.
 
-### **🔹 Cat Model**
-- `name`: Name of the cat  
-- `breed`: Breed of the cat  
-- `age`: Age of the cat  
-- `description`: Brief description  
-- `image`: Cat's image  
-- `available`: Boolean flag (available for adoption or not)  
-
-### **🔹 AdoptionRequest Model**
-- `user`: Reference to the user applying  
-- `cat`: Reference to the cat being adopted  
-- `message`: User's reason for adoption  
-- `status`: Pending, Approved, or Rejected  
-- `request_date`: Date of application  
+### For Admins
+- **Cat Management:** Create, update, and delete cat listings.
+- **Adoption Request Management:** Review, approve, or reject adoption requests.
+- **Role-Based Access:** Only admins can access the admin dashboard.
+- **Security Features:** Prevent duplicate submissions and restrict reapplication for rejected requests for 6 months.
 
 ---
 
-## **🔍 Assessment Compliance Checklist**
-Below is an **evaluation of missing & completed requirements** based on the Full-Stack Toolkit **Assessment Guide**.
-
-| Requirement | Status | Notes |
-|-------------|--------|---------|
-| **1. MVC & Agile Methodology** | ✅ | Django follows MVC, Agile tool (Trello/GitHub Projects) needed for tracking |
-| **2. Database Design & Models** | ✅ | Cat & AdoptionRequest models implemented |
-| **3. Authentication & Authorization** | ✅ | Role-based login with restricted access (user/admin) |
-| **4. Frontend Design (UX & Accessibility)** | ✅ | Bootstrap, CSS, and ARIA labels included |
-| **5. CRUD Operations** | ✅ | Users & admins can create, read, update, and delete records |
-| **6. Testing (Manual/Automated)** | ❌ | **Testing needs implementation (Unit Tests)** |
-| **7. Version Control (Git & GitHub)** | ✅ | Used for development and commits are tracked |
-| **8. Deployment (Cloud Hosting)** | ❌ | **Deployment to a cloud service (e.g., Heroku, Render) required** |
-| **9. API Integration** | ❌ | **No API features yet (optional for extra points)** |
-| **10. README & Documentation** | ✅ | README structured for future updates |
-| **11. Security Features (Env Variables, Debug Mode Off, No Hardcoded Secrets)** | ❌ | **Environment variable handling missing** |
-| **12. UX Documentation (Wireframes, Mockups, User Stories)** | ❌ | **Wireframes & Agile planning missing** |
-
-### **🚨 Missing Features that Need to be Fixed**
-- **Testing Implementation** (Unit Tests for Views, Forms, Models)  
-- **Deployment** (Push to **Heroku, Render, or DigitalOcean**)  
-- **Environment Variables Security** (Store API keys & secrets in `.env`)  
-- **UX Documentation** (Create **wireframes, user journey & flow diagrams**)  
-- **Advanced Features** (APIs, real-time notifications, or a chatbot)  
+## Technology Stack
+- **Frontend:** HTML5, CSS3, JavaScript, Bootstrap
+- **Backend:** Python 3, Django 4.2
+- **Database:** SQLite (development) 
+- **Static Files:** Managed with WhiteNoise
+- **Environment Management:** django-environ for secure configuration
+- **Version Control:** Git and GitHub
 
 ---
 
-## **📸 Screenshots & Demo**
-**(To be added once UI is finalized and deployed)**  
-- Homepage  
-- Cat Listings  
-- Adoption Request Form  
-- Admin Dashboard  
+## Database Schema
+### Main Models:
+- **Cat:**  
+  - `name`: CharField  
+  - `breed`: CharField  
+  - `age`: IntegerField  
+  - `description`: TextField  
+  - `image`: ImageField  
+  - `available`: BooleanField  
+- **AdoptionRequest:**  
+  - `user`: ForeignKey (User)  
+  - `cat`: ForeignKey (Cat)  
+  - `message`: TextField  
+  - `status`: CharField (choices: Pending, Approved, Rejected)  
+  - `request_date`: DateTimeField  
+- **Favorite:**  
+  - `user`: ForeignKey (User)  
+  - `cat`: ForeignKey (Cat)
+
+![Login Page](docs/kitty_connect_erd.png)
 
 ---
+## Testing 
+# Testing Documentation for Kitty Connect
 
-## **🔬 Testing**
-**Manual Testing (Completed)**
-✔️ Tested user authentication (Register/Login/Logout)  
-✔️ Verified role-based access (Users/Admins)  
-✔️ Checked all CRUD operations (Create, Update, Delete)  
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Automated Testing](#automated-testing)
+3. [Manual Testing](#manual-testing)
+4. [Usability Testing](#usability-testing)
+5. [Accessibility Testing](#accessibility-testing)
+6. [Responsive Testing](#responsive-testing)
+7. [Performance Testing](#performance-testing)
+8. [Security Testing](#security-testing)
+9. [Known Bugs](#known-bugs)
 
-**Automated Testing (To Be Implemented)**
-❌ Django Unit Tests (Models, Views, Forms)  
-❌ JavaScript Testing (If applicable)  
+## Introduction
+ The purpose of these tests is to ensure that the website operates as expected and provides a secure, efficient, user-friendly experience.
 
----
+## Automated Testing
+### Django Tests
+#### Models
+- **Cat Model Test:**
+  - Purpose: Ensure the cat model stores all necessary data correctly.
+  - Method: Create a cat instance and verify each field.
+  
+#### Forms
+- **Adoption Form Test:**
+  - Purpose: Check the adoption form validation and data handling.
+  - Method: Submit the form with both valid and invalid data.
 
-## **🛠 Future Improvements**
-✔️ **User Profiles** (Allow users to edit their details)  
-✔️ **Search & Filter** (Find cats by age, breed, or name)  
-✔️ **Email Notifications** (Send emails on request approval/rejection)  
-✔️ **Adoption Status Tracker** (Show progress in steps)  
-✔️ **Better UI/UX** (Enhance design & accessibility)  
+#### Views
+- **Login Required Test:**
+  - Purpose: Confirm that pages requiring a login cannot be accessed anonymously.
+  - Method: Access the URLs without logging in and expect a redirect to the login page.
 
----
+### Integration Testing
+- **User Flow Test:**
+  - Purpose: Simulate a user's action from logging in to adopting a cat.
+  - Method: Use Selenium to test a series of actions performed by the user.
 
-## **🌍 Deployment**
-*(To Be Documented Once the Site is Deployed)*  
-Steps for **Heroku, AWS, or Render** deployment will be updated here.
+## Manual Testing
+### Navigation
+- **Links:**
+  - All navigation links are tested to ensure they point to the correct pages.
 
----
+### Forms
+- **Adoption Application:**
+  - Test each field for validation rules and check the submission process.
+  
+## Usability Testing
+- **User Feedback:**
+  - Collect feedback from a group of users to identify any usability issues.
 
-## **📜 License**
-This project is open-source under the **MIT License**.
+## Accessibility Testing
+- **Screen Reader Tests:**
+  - Use tools like NVDA and VoiceOver to test accessibility.
+- **Color Contrast:**
+  - Verify that text is readable and elements are distinguishable.
 
----
+## Responsive Testing
+- **Device Testing:**
+  - Test the website on various devices (mobile, tablet, and desktop) to ensure layouts adapt correctly.
 
-## **💬 Contact**
-For questions, feel free to reach out:  
-📧 **Email:** your@email.com  
-🐱 **GitHub:** [yourusername](https://github.com/yourusername)  
+## Performance Testing
+- **Load Time:**
+  - Use tools like Google PageSpeed Insights to test and optimize the load time.
 
----
+## Security Testing
+- **SQL Injection:**
+  - Test to ensure that all form inputs and URLs are secure against SQL injection.
+- **Cross-Site Scripting (XSS):**
+  - Check for XSS vulnerabilities in user inputs.
 
+## Known Bugs
+- **Intermittent Login Issue:**
+  - Description: Some users report intermittent failures during login.
+  - Status: Investigating the root cause.
+
+
+## Deployment
+This project is deployed on Heroku. Steps to deploy:
+1. Set up Heroku app.
+2. Attach the database.
+3. Configure environment variables.
+4. Deploy via Git.
+
+## Credits
+### Content
+- The text for cat profiles was copied from ChatGPT
+
+### Media
+- Cat images were sourced from [Unsplash](https://unsplash.com).
+
+## Acknowledgements
+- I would like to thank my mentor Tim Nelson at [Code Institute](https://codeinstitute.net) for their guidance.
