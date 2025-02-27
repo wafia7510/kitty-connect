@@ -1,1 +1,1 @@
-web: gunicorn kittyconnect.wsgi
+web: gunicorn kittyconnect.wsgi:application
