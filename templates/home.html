@@ -135,7 +135,12 @@
             {% for cat in cats|slice:":3" %}
             <div class="col-md-4">
                 <article class="card cat-card mb-4">
-                    <img src="{{ cat.image.url }}" class="card-img-top fixed-cat-img" alt="{{ cat.name }}">
+                    {% if cat.image %}
+                     <img src="{{ cat.image.url }}" class="card-img-top fixed-cat-img" alt="{{ cat.name }}">
+                    {% else %}
+                     <img src="{% static 'images/cat-paws.jpg' %}" class="card-img-top fixed-cat-img" alt="Default Cat">
+                    {% endif %}
+
                     <div class="card-body">
                         <h5 class="card-title">{{ cat.name }}</h5>
                         <p class="card-text"><strong>Breed:</strong> {{ cat.breed }}<br><strong>Age:</strong> {{ cat.age }} years</p>
