@@ -10,16 +10,17 @@ Kitty Connect is a full-stack web application built with Django that connects ca
 2. [Target Audience](#target-audience)
 3. [Wireframes & User Flow](#wireframes--user-flow)
 4. [Features](#features)
-5. [Technology Stack](#technology-stack)
-6. [Database Schema](#database-schema)
-7. [Installation & Setup](#installation--setup)
-8. [Testing](#testing)
-9. [Deployment](#deployment)
-10. [Content & Media](#content--media)
-11. [Credits & Acknowledgements](#credits--acknowledgements)
-12. [Future Improvements](#future-improvements)
-13. [License](#license)
-14. [Contact](#contact)
+5. [Future Improvements](#future-improvements)
+6. [Technology Stack](#technology-stack)
+7. [Database Schema](#database-schema)
+8. [Installation & Setup](#installation--setup)
+9.  [Testing](#testing)
+10. [Deployment](#deployment)
+11. [Content & Media](#content--media)
+12. [Credits & Acknowledgements](#credits--acknowledgements)
+
+
+
 
 ---
 
@@ -157,6 +158,14 @@ User flow diagrams map the steps a user takes:
 
 ---
 
+
+## 🔄 Future Improvements
+- Cloud-based DB (PostgreSQL for Heroku)
+- Email notifications
+- Enhanced search and filtering
+- Add user testimonials
+- REST API for mobile version
+
 ## Technology Stack
 - **Frontend:** HTML5, CSS3, JavaScript, Bootstrap
 - **Backend:** Python 3, Django 4.2
@@ -188,11 +197,20 @@ User flow diagrams map the steps a user takes:
 
 ![Login Page](docs/kitty_connect_erd.png)
 
----
-## Testing 
-# Testing Documentation for Kitty Connect
+## 📅 Agile Methodology
+### Tools
+- **GitHub Projects** for Epics, User Stories, and Tasks
 
-## Table of Contents
+### Examples
+- **User Story:** As a user, I want to apply for adoption and get notified of updates.
+- **Tasks:** Design form, set up model, build view, add email confirmation (if applicable)
+- **Acceptance Criteria:** Can apply, view status, reapply restriction enforced
+
+All user stories are mapped to project goals and documented in GitHub issues.
+
+## Testing 
+
+### Table of Contents
 1. [Introduction](#introduction)
 2. [Automated Testing](#automated-testing)
 3. [Manual Testing](#manual-testing)
@@ -255,24 +273,30 @@ User flow diagrams map the steps a user takes:
 - **Load Time:**
   - Use tools like Google PageSpeed Insights to test and optimize the load time.
 
-## Security Testing
-- **SQL Injection:**
-  - Test to ensure that all form inputs and URLs are secure against SQL injection.
-- **Cross-Site Scripting (XSS):**
-  - Check for XSS vulnerabilities in user inputs.
-
-## Known Bugs
-- **Intermittent Login Issue:**
-  - Description: Some users report intermittent failures during login.
-  - Status: Investigating the root cause.
+### Bugs
+- **Resolved:** Local images not displaying (fixed media file path and settings)
+- **Resolved:** Admin redirect logic from login
+- **Known:** None at time of submission
 
 
-## Deployment
-This project is deployed on Heroku. Steps to deploy:
-1. Set up Heroku app.
-2. Attach the database.
-3. Configure environment variables.
-4. Deploy via Git.
+## 🚧 Deployment
+
+### Steps
+1. Install dependencies: `pip install -r requirements.txt`
+2. Set `DEBUG=False` and configure `.env`
+3. Use Cloudinary for media
+4. Push to Heroku Git or connect to GitHub repo
+
+### Files
+- `Procfile`
+- `requirements.txt`
+- `.env`
+- `.gitignore`
+
+### Security
+- `SECRET_KEY`, `DB`, `DEBUG` are hidden in `.env`
+- `ALLOWED_HOSTS` set for Heroku
+
 
 ## Credits
 ### Content
