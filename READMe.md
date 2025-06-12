@@ -160,10 +160,9 @@ User flow diagrams map the steps a user takes:
 
 
 ## 🔄 Future Improvements
-- Cloud-based DB (PostgreSQL for Heroku)
 - Email notifications
 - Enhanced search and filtering
-- Add user testimonials
+- Add user testimonials and comments
 - REST API for mobile version
 
 ## Technology Stack
@@ -269,33 +268,122 @@ All user stories are mapped to project goals and documented in GitHub issues.
 - **Device Testing:**
   - Test the website on various devices (mobile, tablet, and desktop) to ensure layouts adapt correctly.
 
-## Performance Testing
-- **Load Time:**
-  - Use tools like Google PageSpeed Insights to test and optimize the load time.
-
 ### Bugs
 - **Resolved:** Local images not displaying (fixed media file path and settings)
 - **Resolved:** Admin redirect logic from login
 - **Known:** None at time of submission
 
 
-## 🚧 Deployment
 
-### Steps
-1. Install dependencies: `pip install -r requirements.txt`
-2. Set `DEBUG=False` and configure `.env`
-3. Use Cloudinary for media
-4. Push to Heroku Git or connect to GitHub repo
+## 🚀 Deployment
 
-### Files
-- `Procfile`
-- `requirements.txt`
-- `.env`
-- `.gitignore`
+Follow these exact steps to deploy Kitty Connect on Heroku. 
+---
 
-### Security
-- `SECRET_KEY`, `DB`, `DEBUG` are hidden in `.env`
-- `ALLOWED_HOSTS` set for Heroku
+### 1. Clone & Install Dependencies
+
+```bash
+# 1. Clone your repo
+git clone https://github.com/wafia7510/kitty-connect.git
+cd kittyconnect
+
+# 2. Create & activate a virtual environment
+python3 -m venv .venv
+source .venv/bin/activate      # macOS/Linux
+.\.venv\Scripts\activate     # Windows PowerShell
+
+# 3. Install Python dependencies
+pip install -r requirements.txt
+```
+
+---
+
+### 2. Create Your `.env` File
+
+In the project root, create a file named `.env` (do **not** commit it). Add exactly:
+
+```dotenv
+# Your Django secret key
+SECRET_KEY=your-django-secret-key
+
+# Must be False in production
+DEBUG=False
+
+# Comma-separated domains your app will serve
+ALLOWED_HOSTS=your-app.herokuapp.com,localhost,127.0.0.1
+
+# Use SQLite in production
+DATABASE_ENGINE=django.db.backends.sqlite3
+DATABASE_NAME=db.sqlite3
+```
+
+---
+
+### 3. Procfile & Python Runtime
+
+Create these two files in your repo root:
+
+- **Procfile**  
+  ```text
+  web: gunicorn kittyconnect.wsgi
+  ```  
+  _(Tells Heroku to use Gunicorn to serve your app)_
+
+- **runtime.txt**  
+  ```text
+  python-3.10.12
+  ```  
+  _(Pins Python version on Heroku)_
+
+---
+
+### 4. Create & Configure Your Heroku App
+
+```bash
+# 1. Create a new Heroku app
+heroku create your-app-name
+
+# 2. Push your code to Heroku
+git push heroku main
+
+# 3. Copy your .env values into Heroku’s config
+heroku config:set \
+  SECRET_KEY=$(grep SECRET_KEY .env | cut -d '=' -f2) \
+  DEBUG=False \
+  ALLOWED_HOSTS=your-app.herokuapp.com,localhost,127.0.0.1 \
+  
+```
+
+> Alternatively, go to your Heroku Dashboard → Settings → Config Vars and add each key/value manually.
+
+---
+
+### 5. Run Migrations & Collect Static Files
+
+```bash
+# Apply database migrations
+heroku run python manage.py migrate
+
+```
+
+---
+
+### 6. Verify Your Live Site
+
+1. Open your app:  
+   ```bash
+   heroku open
+   ```
+2. Tail the logs for errors:  
+   ```bash
+   heroku logs --tail
+   ```
+3. Check that:
+   - Your CSS and JavaScript load correctly.
+   - Login, browsing cats, making adoption requests all work.
+   - There are no “DisallowedHost” or 500 errors.
+
+---
 
 
 ## Credits

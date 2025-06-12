@@ -49,8 +49,8 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="{% url 'cat_list' %}" aria-label="View Available Cats">Available Cats</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#how-to-adopt" aria-label="Learn How to Adopt">How to Adopt</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#cat-care-tips" aria-label="View Cat Care Tips">Cat Care Tips</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#how-to-adopt-heading" aria-label="Learn How to Adopt">How to Adopt</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#cat-care-tips-heading" aria-label="View Cat Care Tips">Cat Care Tips</a></li>
 
                         {% if user.is_authenticated %}
                             {% if user.is_superuser %}
