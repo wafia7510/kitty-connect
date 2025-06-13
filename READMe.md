@@ -269,8 +269,7 @@ All user stories are mapped to project goals and documented in GitHub issues.
   - Test the website on various devices (mobile, tablet, and desktop) to ensure layouts adapt correctly.
 
 ### Bugs
-- **Resolved:** Local images not displaying (fixed media file path and settings)
-- **Resolved:** Admin redirect logic from login
+- **Resolved:** Local images not displaying (fixed media file path and settings),Fix social media links and Fix navigation links of header
 - **Known:** None at time of submission
 
 
