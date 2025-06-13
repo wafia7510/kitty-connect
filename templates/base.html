@@ -93,7 +93,7 @@
                         <li><a href="{% url 'home' %}" class="text-white" aria-label="Go to Home">Home</a></li>
                         <li><a href="{% url 'cat_list' %}" class="text-white" aria-label="View Available Cats">Available Cats</a></li>
                         <li><a href="{% url 'home' %}#how-to-adopt-heading" class="text-white" aria-label="Learn How to Adopt">How to Adopt</a></li>
-                        <li><a href="{% url 'home' %}#cat-care-tips-heading" aria-label="View Cat Care Tips">Cat Care Tips</a></li>
+                        <li><a href="{% url 'home' %}#cat-care-tips-heading" class="text-white" aria-label="View Cat Care Tips">Cat Care Tips</a></li>
                         {% if user.is_authenticated %}
                             {% if user.is_superuser %}
                                 <li><a href="{% url 'admin_dashboard' %}" class="text-white" aria-label="Admin Dashboard">Admin Dashboard</a></li>
