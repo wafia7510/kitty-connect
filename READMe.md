@@ -259,8 +259,6 @@ All user stories are mapped to project goals and documented in GitHub issues.
   - Collect feedback from a group of users to identify any usability issues.
 
 ## Accessibility Testing
-- **Screen Reader Tests:**
-  - Use tools like NVDA and VoiceOver to test accessibility.
 - **Color Contrast:**
   - Verify that text is readable and elements are distinguishable.
 
